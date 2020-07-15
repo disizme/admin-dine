@@ -1,0 +1,340 @@
+// Here you can add other styles
+// Here you can add other styles
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+button:focus{
+    outline: none;
+}
+
+.card{ 
+    border-color: #e7eaec;
+}
+
+.main{
+    background-color: #f5f5f8;
+}
+
+.sidebar-nav{
+    background: #2a3042;
+}
+
+.sidebar .nav-link .nav-icon{
+    color: #f7f7f7;
+}
+
+.app-header .navbar-brand{
+    width: 100px;
+}
+
+.close-btn{
+    position: absolute;
+    right: 0;
+    border-radius: 1em;
+    cursor: pointer;
+    padding: 0.1em 0.5em;
+    font-size: large;
+    color: #73818f;
+}
+
+
+.brand-btn{
+    background-color: #FF6737;
+    border-color: #FF6737;
+    color: white;
+}
+
+.brand-btn:hover{
+    background-color: #FF6737DD;
+    border-color: #FF6737DD;
+    color: white;
+}
+
+
+.brand-outline-btn{
+    border-color: #c8ced3;
+    background: #fff;
+    color: #73818f;
+}
+.brand-outline-btn:hover {
+    color: #fff;
+    background-color: #FF6737;
+    border-color: #FF6737;
+}
+
+a, .brand-color{
+    color: #FF6737;
+}
+
+.sidebar{
+    background: #fff;
+    border-right: 0.5px solid #eee;
+}
+
+.sidebar .nav-link{
+    color: #f7f7f7;
+}
+
+.sidebar-minimizer{
+    margin-top: 0em !important;
+    border: none;
+    margin-left: 8px;
+    background: white;
+}
+
+.sidebar .nav-link.active .nav-icon{
+    color: white;
+}
+
+.sidebar .nav-link.active{
+    background: #FF6737;
+}
+
+.sidebar .nav-link:hover{
+    background: #FF6737 !important;
+}
+
+.sidebar .nav-title{
+    color: #333;
+}
+
+.sidebar .nav-dropdown.open{
+    background: #222;
+}
+
+.sidebar .nav-dropdown.open .nav-link{
+    color: #f7f7f7;
+}
+
+@media (min-width: 992px){
+    .sidebar-minimized .sidebar .nav-item:hover > .nav-link {
+        background: #FF6737;
+        color: white;
+    }
+    .brand-minimized .app-header .navbar-brand{
+        width: 60px;
+    }
+    .sidebar-minimized .sidebar .nav > .nav-dropdown > .nav-dropdown-items{
+        background: #222;
+    }
+}
+
+.breadcrumb{
+    margin-bottom: 1rem;
+}
+
+// .btn:focus, .btn.focus {
+//     outline: 0;
+//     box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25);
+// }
+
+.form-control:focus{
+    border-color: #FF6737;
+    border-width: 1px;
+    box-shadow: 0 0 0 0px rgba(255, 103, 55, 0.2);
+}
+
+.uploadedDoc{
+    height: 100px;
+    // width: 100px;
+    object-fit: cover;
+    border: 1px solid #e4e7ea;
+    border-radius: 0.25rem;
+}
+
+.doc-container{
+    height: 100px;
+    // width: 100px;
+    // background-color: #73818f;
+}
+.remove-upload{
+    color: white;
+    font-weight: bold;
+    position: relative;
+    right: 0.5em;
+    top: -45px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.uploadDocument{
+    border-radius: 0.25rem;
+    height: 100px;
+    width: 100px;
+    background-color: #e4e7ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .uploadDocument:hover{
+    background-color: #dadee1;
+  }
+  .uploadDocument:hover > i{
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    -o-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: animateuploadbutton 1.4s infinite ease-in-out;
+  }
+  .uploadDocument:active{
+    background-color: #d2d3d4;
+    border-color: #8ad4ee;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25);
+  }
+  .uploadDocument input[type="file"]{
+    -webkit-appearance:none;
+    position:absolute;
+    top:0;
+    left:0;
+    opacity:0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .uploadDocument i {
+      font-size: xx-large;
+  }
+  @keyframes animateuploadbutton {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-10px);
+    }
+    75% {
+      transform: translateY(10px);
+    }
+    0% {
+      transform: translateY(0);
+    }
+  }
+  
+
+  .img-grid{
+      display: inline-block;
+  }
+
+  .img-grid > img{
+    // width: 150px;
+    border: 1px solid #e4e7ea;
+    height: 20vh;
+    margin: 0 0.5em 0.5em 0;
+    cursor: pointer;
+  }
+
+  .table-img{
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+  }
+
+  .image-modal .modal-content{
+      background: rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-content > img{
+      max-height: 90vh;
+      object-fit: scale-down;
+    //   max-width: 100%;
+  }
+
+  .img-dex{
+      display: none;
+      position: absolute;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      margin: 0;
+      padding: 2em;
+  }
+
+  .modal-content:hover .img-dex{
+    display: flex;
+    width: 100%;
+    color: white;
+  }
+
+  .left-arrow:hover, .right-arrow:hover, .close-btn:hover{
+      color: white;
+  }
+  @media (min-width: 576px){
+      .image-modal{
+          max-width: none;
+          height: 80vh;
+          margin: 1em 1em 2em;
+      }
+  }
+  @media (max-width: 576px){
+    .img-dex{
+        position: inherit;
+        display: flex;
+        margin-top: -10px;
+        color: white;
+    }
+    .left-arrow, .right-arrow{
+        top: 30% !important;
+    }
+    .image-modal{
+        display: flex;
+        align-items: center;
+        min-height: calc(100% - 1rem);
+        margin: 1em 1em;
+    }
+}
+
+  .left-arrow{
+    position: absolute;
+    top: 45%;
+    font-size: large;
+    padding: 0 0.5em;
+    cursor: pointer;
+    color: #73818f;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .right-arrow{
+    position: absolute;
+    top: 45%;
+    right: 0;
+    font-size: large;
+    padding: 0 0.5em;
+    cursor: pointer;
+    color: #73818f;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .fetch-table thead tr{
+      text-align: center;
+  }
+
+  .fetch-table thead tr th, .fetch-table tbody tr td{
+      border: 0.5px solid #bbb;
+      white-space: nowrap;
+  }
+
+  .msg-icon{
+      font-size: x-large;
+        vertical-align: middle;
+    }
+
+.page-item.disabled .page-link{
+    color: #ccc;
+}

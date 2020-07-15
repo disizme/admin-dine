@@ -1,0 +1,78 @@
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+.snackbar{
+    border-radius: 2px;
+    color: rgb(83, 81, 81);
+    box-shadow: 0 0px 6px 1px rgba(0,0,0,0.3), 0 0px 15px 1px rgba(0,0,0,0.3);
+    transition: 1.5s ease-in;
+    width: 320px;
+    padding: 10px 15px 10px 15px;
+    bottom: 5%;
+    right: 16px;
+    background: #eee;
+    animation-name: appear;
+    animation-duration: 0.5s;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1300;
+}
+.snackbar .message{
+  flex-grow: 1;
+}
+.snackbar .icon {
+    font-family: 'Material Icons', serif;
+    font-style: normal;
+    font-size: x-large;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+    border: none;
+    padding: 2px;
+    background: none;
+  }
+
+.snackbar.success{
+    border-left: 5px solid rgb(113, 224, 85);
+} 
+.snackbar.warning{
+    border-left: 5px solid rgba(249, 252, 71, 0.933);
+}
+
+.snackbar.error{
+    border-left: 5px solid rgba(235, 46, 46, 0.933);
+}
+.snackbar.info{
+    border-left: 5px solid rgba(197, 192, 192, 0.933);
+}
+
+@keyframes appear{
+    0%{
+        bottom:5%;
+        right: -30%;
+    }
+    50%{
+      bottom: 5%;
+      right: 24px;
+    }
+    70%{
+      bottom: 5%;
+      right: 8px;
+    }
+    90%{
+      bottom: 5%;
+      right: 20px;
+    }
+    to{
+        bottom: 5%;
+        right: 16px;
+    }
+}
