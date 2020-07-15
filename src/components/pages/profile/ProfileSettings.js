@@ -56,12 +56,11 @@ class ProfileSettings extends Component {
     let {getLoggedInUser} = this.props
     if(prevProps.getLoggedInUser !== getLoggedInUser){
       if(getLoggedInUser.success){
-        console.log(getLoggedInUser.success, "up")
         let editable = getLoggedInUser.success.data
         let {...data} = editable
         let pathImage = { photo: [editable.photo] }
         data.photo = [editable.photo]
-        this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slugdata})
+        this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
       }
     }
   }
@@ -168,23 +167,22 @@ class ProfileSettings extends Component {
   }
 
   generateQR = () => {
-    // let {success} = this.props.getLoggedInUser
-    // if(success){
-    //   let slugname = success.data && success.data.slug
-    //   this.setState({
-    //     qrshow: !this.state.qrshow,
-    //     slugdata: slugname
-    //   })
-    // }else{
-    //   store.dispatch(addSuccessMessage({
-    //           message: { variant: `error`, message: "Slug is not found", title: `` }
-    //         }))
-    // }
-
-    this.setState({
-      qrshow: !this.state.qrshow,
-      slugdata: this.state.data.slug
-    })
+    let {success} = this.props.getLoggedInUser
+    if(success){
+      let slugname = success.data && success.data.slug
+      this.setState({
+        qrshow: !this.state.qrshow,
+        slugdata: slugname
+      })
+    }else{
+      store.dispatch(addSuccessMessage({
+              message: { variant: `error`, message: "Could not find Slug. Update your Profile first.", title: `` }
+        }))
+    }
+    // this.setState({
+    //   qrshow: !this.state.qrshow,
+    //   slugdata: this.state.data.slug
+    // })
   }
 
   render() {

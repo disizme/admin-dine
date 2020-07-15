@@ -64,7 +64,7 @@ class Login extends Component {
             localStorage.setItem('rt', data.refresh);
             // localStorage.setItem('user', data.user.email);
             // localStorage.removeItem('redirect')
-            // store.dispatch(getLoggedInUser(data.user));
+            store.dispatch(getLoggedInUser());
             this.props.history.push("/dashboard");
           // }else{
           //   store.dispatch(addSuccessMessage({
