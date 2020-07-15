@@ -93,7 +93,7 @@ class Login extends Component {
                     <Form onSubmit={(e) => this.onSubmit(e)}>
                     <FormGroup className="mb-3">
                       <Label for="username">Username</Label>
-                      <Input type="text" placeholder="username"
+                      <Input type="text" placeholder="Username"
                         name="username" id="username"
                         value={this.state.data.username}
                         invalid = {this.state.touched.username && this.state.data.username===''}

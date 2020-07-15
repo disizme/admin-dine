@@ -45,7 +45,10 @@ class DefaultHeader extends Component {
           {/*</NavItem>*/}
           <AppHeaderDropdown direction="down" style={{marginRight:"1.25rem"}}>
             <DropdownToggle nav>
-              <img src={logo} className="img-avatar" alt="User" />
+              {/* <img src={logo} className="img-avatar" alt="User" /> */}
+              <div className="img-avatar" style={{fontSize: "25px"}}>
+                <i className="fa fa-user-circle"/>
+              </div>
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
