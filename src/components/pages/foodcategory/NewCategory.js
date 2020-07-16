@@ -64,10 +64,8 @@ class NewCategory extends Component {
       }else{
         this.setState({load: true})
         if(this.id){
-          console.log("edit", data)
           store.dispatch(editFoodCategory(data))
         }else {
-          console.log("post", data)
           store.dispatch(postFoodCategory(data))
         }
       }

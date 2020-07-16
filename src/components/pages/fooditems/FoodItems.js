@@ -369,6 +369,24 @@ function FoodItems(props) {
   function onDelete(id) {
     // store.dispatch(deleteFooditems(id))
   }
+  
+  function onDragStart(e, i) {
+    e.dataTransfer.setData('idx', i)
+  }
+
+  function onDragOver(e) {
+    e.preventDefault()
+  }
+
+  function onDrop(e, i) {
+    let idx = e.dataTransfer.getData('idx')
+    let update = data
+    let a = update[idx]
+    update.splice(idx, 1)
+    update.splice(i, 0, a)
+    setData(update)
+    setMeta({})
+  }
 
   useEffect(() => {
     if(!props.fetchFoodItems.success){
@@ -379,6 +397,7 @@ function FoodItems(props) {
     }
   }, [])
 
+  
   useEffect(() => {
     let { success, error } = props.fetchFoodItems;
     if (error) {
@@ -387,6 +406,7 @@ function FoodItems(props) {
         // let x = { ...success.data }
         // let { data } = x;
         setData(success.data)
+        // setData(datajson)
         setMeta(meta)
       }else{
         setData([])
@@ -424,6 +444,10 @@ function FoodItems(props) {
           currentFetch = {fetchType}
           onEdit={(e) => onEdit(e)}
           onDelete={(e) => onDelete(e)}
+          draggable={true}
+          onDragStart={(e,i) => onDragStart(e,i)}
+          onDragOver={(e) => onDragOver(e)}
+          onDrop={(e,i) => onDrop(e,i)}
           // deleteTitle="Image"
           message={`Sorry, There are no records of food items.`}
           onNew={() => {

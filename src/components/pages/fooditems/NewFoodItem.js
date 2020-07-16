@@ -117,10 +117,8 @@ class NewFoodItem extends Component {
             if(!data.image.length || !data.image[0].name){
               finalData.delete("image")
             }
-            console.log("edit", finalData)
             store.dispatch(editFooditems(finalData))
           }else{
-          console.log("post", finalData)
           store.dispatch(postFooditems(finalData))
           }
         }

@@ -27,7 +27,7 @@ import fallbackImg from '../../../assets/img/imgplace.png';
 function Tables(props) {
   const { observe } = lozad();
 // eslint-disable-next-line
-  let { data, message, hideNew, title, rows, meta, attributes,fetchList, showGridOption, updateFetch,currentFetch, fetch, loading, filters, onChangeFilter, setFilters, onNew, onEdit, onDelete, onView, onLink, onSend, onPrint, contentDownload, downloadData, downloadError, setDownloadData, getDownload, grid, toggleGrid, deleteTitle, customAction } = props
+  let { data, message, hideNew, draggable, title, rows, meta, attributes,fetchList, showGridOption, updateFetch,currentFetch, fetch, loading, filters, onChangeFilter, setFilters, onNew, onEdit, onDelete, onView, onLink, onSend, onPrint, contentDownload, downloadData, downloadError, setDownloadData, getDownload, grid, toggleGrid, deleteTitle, customAction } = props
   let { to, from, total } = meta
   let [downloadOpen, setDownloadOpen] = useState(0)
   let [filterOpen, setFilterOpen] = useState(0)
@@ -635,7 +635,10 @@ function Tables(props) {
                 </thead>
                 <tbody>
                   {data.map((o, i) => (
-                    <tr key={i}>
+                    <tr key={i} draggable={!!draggable} style={{cursor: draggable ? "move" : ""}}
+                    onDragStart={e => props.onDragStart(e, i)}
+                    onDragOver={e => props.onDragOver(e)}
+                    onDrop={e => props.onDrop(e, i)}>
                       {
                         rows.map(p => {
                           if (p.type === "action") {
