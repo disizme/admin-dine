@@ -79,7 +79,7 @@ class NewCategory extends Component {
           store.dispatch(addSuccessMessage({
             message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
           }))
-          // store.dispatch(fetchFoodCategory())
+          store.dispatch(fetchFoodCategory())
           this.props.history.push("/emenu/food-category")
         }
         else if (error) {

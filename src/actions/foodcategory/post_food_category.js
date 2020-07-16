@@ -38,10 +38,14 @@ export function postFoodCategory(data) {
         dispatch(_success(res));
 
       }).catch(error => {
+        // let response = errorHandler(error)
+        //   store.dispatch(addSuccessMessage({
+        //     message: {variant: `error`, message: response.data, title: ``}
+        //   }))
         let response = errorHandler(error)
-          store.dispatch(addSuccessMessage({
-            message: {variant: `error`, message: response.data, title: ``}
-          }))
+        store.dispatch(addSuccessMessage({
+          message: {variant: `error`, message: "Create your Profile first!", title: ``}
+        }))
           dispatch(_error({response:{status:500,data:response.data}}));
         dispatch(_processing(false));
       });

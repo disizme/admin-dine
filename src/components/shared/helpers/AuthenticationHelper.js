@@ -13,7 +13,7 @@ export const checkTokenExpiry = () => {
 export const tokenInterception = () => {
     return new Promise((resolve, reject) => {
         let config = {
-            url: Config.BaseUrl + `/token/refresh`,
+            url: Config.BaseUrl + `/token/refresh/`,
             method: "post",
             dataType: 'json',
             data: {
@@ -23,7 +23,7 @@ export const tokenInterception = () => {
         };
         axios(config).then(res => {
             localStorage.setItem('Bearer', res.data.access);
-            localStorage.setItem('rt', res.data.refresh);
+            // localStorage.setItem('rt', res.data.refresh);
             console.log("token refreshed")
             resolve(res)
         }).catch(error => {

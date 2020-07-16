@@ -270,7 +270,16 @@ class ProfileSettings extends Component {
                   {!this.state.qrshow ? <Button className="brand-btn" onClick={() => {this.generateQR()}}>
                     Generate QR Code
                   </Button>
-                  : <QRGen slug={this.state.slugdata} />
+                  : <div className="row">
+                    <div className="col-6">
+                    <h3>Menu</h3>
+                  <QRGen slug={this.state.slugdata} pagefor={"menu"} />
+                    </div>
+                    <div className="col-6">
+                    <h3>Check In</h3>
+                  <QRGen slug={this.state.slugdata} pagefor={"checkin"} />
+                      </div>
+                  </div>
                   }
                   </div>
                 </CardBody>

@@ -155,9 +155,9 @@ function Categories(props) {
     if (error) {
     } else if (success) {
       if (success.data) {
-        let x = { ...success.data }
-          let { ...data } = x;
-            setData(data)
+        // let x = { ...success.data }
+        //   let { ...data } = x;
+            setData(success.data)
           // setMeta(meta)
       }else{
         setData([])
@@ -172,8 +172,8 @@ function Categories(props) {
         store.dispatch(addSuccessMessage({
           message: {variant: `success`, message: success.data.msg || success.data.message, title: ``}
         }))
-        // store.dispatch(deleteFoodCategoryReset())
-        // store.dispatch(fetchFoodCategory())
+        store.dispatch(deleteFoodCategoryReset())
+        store.dispatch(fetchFoodCategory())
         // fetch(attributes)
       }
       else if (error) {

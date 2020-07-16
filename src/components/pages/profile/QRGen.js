@@ -15,7 +15,7 @@ export default class QRGen extends Component {
     download = () => {
         const canvas = document.querySelector('.HpQrcode > canvas');
         this.downloadRef.href = canvas.toDataURL();
-        this.downloadRef.download = this.props.slug + this.state.size + "-QR.png";
+        this.downloadRef.download = this.props.slug + this.state.size + this.props.pagefor+ "-QR.png";
     }
 
     selectSize = (id) => {
@@ -48,7 +48,7 @@ export default class QRGen extends Component {
                 <div className="text-center">
                     <div className="HpQrcode ">
                         <QRCode
-                            value={`${Config.qr_url}${this.props.slug}/menu`}
+                            value={`${Config.qr_url}${this.props.slug}/${this.props.pagefor}`}
                             size={size}
                             level={'H'}
                         />
