@@ -64,7 +64,7 @@ class Register extends Component {
         if (success.data) {
           let data = success.data
           store.dispatch(addSuccessMessage({
-                message: { variant: `error`, message: "Please Login to continue!", title: `` }
+                message: { variant: `success`, message: "Please Login to continue!", title: `` }
               }))
             this.props.history.push("/login")
           // if(checkAdmin(data.user.roles)){
