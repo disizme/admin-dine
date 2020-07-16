@@ -44,8 +44,8 @@ class ProfileSettings extends Component {
         let editable = success.data
         console.log(success, "mount")
         let {...data} = editable
-        let pathImage = { photo: [editable.photo] }
-        data.photo = [editable.photo]
+        let pathImage = !editable.photo ? { photo: [editable.photo] } : {}
+        data.photo = !editable.photo ? [editable.photo] : []
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
     }else{
       store.dispatch(getLoggedInUser())
@@ -58,8 +58,8 @@ class ProfileSettings extends Component {
       if(getLoggedInUser.success){
         let editable = getLoggedInUser.success.data
         let {...data} = editable
-        let pathImage = { photo: [editable.photo] }
-        data.photo = [editable.photo]
+        let pathImage = !editable.photo ? { photo: [editable.photo] } : {}
+        data.photo = !editable.photo ? [editable.photo] : []
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
       }
     }
@@ -217,7 +217,7 @@ class ProfileSettings extends Component {
       {
         name: "postal",
         placeholder: "Postal",
-        type: "number",
+        type: "text",
         required: false,
         value: data.postal,
       },

@@ -37,7 +37,6 @@ export function getLoginRequest(data) {
         // 'Authorization': 'Bearer ' + loginToken
       }
     }).then(res => {
-      console.log("logged",res)
         dispatch(_processing(false));
         dispatch(_success(res));
 

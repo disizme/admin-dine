@@ -63,7 +63,10 @@ class Register extends Component {
       if (success) {
         if (success.data) {
           let data = success.data
-          console.log("inpate", success)
+          store.dispatch(addSuccessMessage({
+                message: { variant: `error`, message: "Please Login to continue!", title: `` }
+              }))
+            this.props.history.push("/login")
           // if(checkAdmin(data.user.roles)){
           // localStorage.setItem('Bearer', data.access_token);
           // localStorage.setItem('rt', data.refresh_token);
@@ -71,9 +74,7 @@ class Register extends Component {
           // store.dispatch(getLoggedInUser(data.user));
           // this.props.history.push("/login");
           // }else{
-          //   store.dispatch(addSuccessMessage({
-          //     message: { variant: `error`, message: "This user does not have admin permission!", title: `` }
-          //   }))
+          //   
           // }
         }
       }
