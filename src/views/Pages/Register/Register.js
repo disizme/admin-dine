@@ -67,6 +67,7 @@ class Register extends Component {
                 message: { variant: `success`, message: "Please Login to continue!", title: `` }
               }))
             this.props.history.push("/login")
+            
           // if(checkAdmin(data.user.roles)){
           // localStorage.setItem('Bearer', data.access_token);
           // localStorage.setItem('rt', data.refresh_token);
