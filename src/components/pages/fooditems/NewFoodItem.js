@@ -224,6 +224,7 @@ class NewFoodItem extends Component {
           impaths = {imagepaths}
           onCancel={() => this.onCancel()}
           load= {load}
+          onRemove = {(e) => this.removeImage(e)}
           buttonText={"Save"}
           // customButton={{name: "send"}}
           // options={options}
