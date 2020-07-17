@@ -47,11 +47,11 @@ export function fetchFooditems(attribute) {
     };
     axios(config).then(res => {
         dispatch(_processing(false));
-        let ims = res.data.map(i => {
-          i["image"] = Config.urlbase+i.image
-          return i
-        })
-        res["data"] = ims
+        // let ims = res.data.map(i => {
+        //   i["image"] = Config.urlbase+i.image
+        //   return i
+        // })
+        // res["data"] = ims
         dispatch(_success(res));
 
       }).catch(error => {
