@@ -405,7 +405,7 @@ function FoodItems(props) {
       if (success.data) {
         // let x = { ...success.data }
         // let { data } = x;
-        setData(success.data)
+        setData(success.data.results)
         // setData(datajson)
         setMeta(meta)
       }else{

@@ -146,10 +146,15 @@ class ProfileSettings extends Component {
         let { success } = postUserProfile;
         if (success) {
           store.dispatch(addSuccessMessage({
-            message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
+            message: { variant: `success`, message: "Your Profile is created. " || success.data.msg, title: `` }
           }))
+          let editable = success.data
+        let {...data} = editable
+        let pathImage =  { photo: [editable.photo] } 
+        data.photo = [editable.photo] 
+        this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
           // store.dispatch(fetchBanner())
-          window.location.reload()
+          // window.location.reload()
         }
 
     // }

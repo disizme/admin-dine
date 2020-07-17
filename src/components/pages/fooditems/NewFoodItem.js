@@ -182,12 +182,12 @@ class NewFoodItem extends Component {
         value: data.description,
       },
       {
-        name: 'category',
+        name: 'category_name',
         dropdown_name: 'category',
         placeholder: 'Category',
-        value: data.category,
-        error: error.category,
-        dropdown_value: data.category,
+        value: data.category_name,
+        error: error.category_name,
+        dropdown_value: data.category_name,
         type: 'dropdown',
         required: true,
         // option:[
@@ -196,8 +196,8 @@ class NewFoodItem extends Component {
         //   { id:"market", name: "Dinner" },
         //   { id:"url", name: "Lunch" },
         // ]
-        option: fetchFoodCategory.success ? fetchFoodCategory.success.data.length>0 ? 
-        fetchFoodCategory.success.data.map(i => {
+        option: fetchFoodCategory.success ? fetchFoodCategory.success.data.results ? 
+          fetchFoodCategory.success.data.results.map(i => {
           return {id: i.name, name: i.name}
         }) : [{id: 0, name: "No Categories Found"}] : [{id: 0, name: "No Categories Found"}]
       },

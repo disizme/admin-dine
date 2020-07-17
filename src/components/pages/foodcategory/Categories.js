@@ -157,7 +157,7 @@ function Categories(props) {
       if (success.data) {
         // let x = { ...success.data }
         //   let { ...data } = x;
-            setData(success.data)
+            setData(success.data.results)
           // setMeta(meta)
       }else{
         setData([])
