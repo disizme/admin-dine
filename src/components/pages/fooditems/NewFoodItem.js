@@ -38,7 +38,7 @@ class NewFoodItem extends Component {
     if(this.id){
       const {success} = this.props.fetchFoodItems
       if(success && success.data && success.data){
-        let editable = success.data.data.find(i => i.id === parseInt(this.id))
+        let editable = success.data.find(i => i.id === parseInt(this.id))
         if(editable){
           let {...data} = editable
           let pathImage = { image: [editable.image] }
@@ -117,7 +117,7 @@ class NewFoodItem extends Component {
             if(!data.image.length || !data.image[0].name){
               finalData.delete("image")
             }
-            store.dispatch(editFooditems(finalData))
+            store.dispatch(editFooditems(finalData, this.id))
           }else{
           store.dispatch(postFooditems(finalData))
           }
@@ -130,7 +130,7 @@ class NewFoodItem extends Component {
         let { success, error } = postFoodItems;
         if (success) {
           store.dispatch(addSuccessMessage({
-            message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
+            message: { variant: `success`, message: success.data.message || success.data.msg || "Food Item added.", title: `` }
           }))
           store.dispatch(fetchFooditems())
           this.props.history.push("/emenu/food-items")
@@ -142,7 +142,7 @@ class NewFoodItem extends Component {
       let { success, error } = editFoodItems;
       if (success) {
         store.dispatch(addSuccessMessage({
-          message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
+          message: { variant: `success`, message: success.data.message || success.data.msg || "Food Item edited.", title: `` }
         }))
         store.dispatch(fetchFooditems())
         this.props.history.push("/emenu/food-items")

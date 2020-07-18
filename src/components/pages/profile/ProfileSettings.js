@@ -8,6 +8,7 @@ import QRGen from './QRGen';
 import getLoggedInUser from '../../../actions/login/get_logged_in_user';
 import postUserProfile from '../../../actions/userprofile/post_userprofile';
 import UpdateSetting from './UpdateSetting';
+import editUserProfile from '../../../actions/userprofile/edit_userprofile';
 
 let dataFormat = {
   photo: [],
@@ -15,7 +16,7 @@ let dataFormat = {
   address: "",
   postal: "",
   city: "",
-  slug: ""
+  // slug: ""
 }
 
 let errorFormat = {
@@ -42,26 +43,12 @@ class ProfileSettings extends Component {
     let { success } = this.props.getLoggedInUser
     if(success){
         let editable = success.data
-        console.log(success, "mount")
         let {...data} = editable
-        let pathImage = !editable.photo ? { photo: [editable.photo] } : {}
-        data.photo = !editable.photo ? [editable.photo] : []
+        let pathImage = editable.photo ? { photo: [editable.photo] } : {photo: []}
+        data.photo = editable.photo ? [editable.photo] : []
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
     }else{
       store.dispatch(getLoggedInUser())
-    }
-  }
-
-  componentDidUpdate(prevProps){
-    let {getLoggedInUser} = this.props
-    if(prevProps.getLoggedInUser !== getLoggedInUser){
-      if(getLoggedInUser.success){
-        let editable = getLoggedInUser.success.data
-        let {...data} = editable
-        let pathImage = !editable.photo ? { photo: [editable.photo] } : {}
-        data.photo = !editable.photo ? [editable.photo] : []
-        this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
-      }
     }
   }
 
@@ -104,7 +91,7 @@ class ProfileSettings extends Component {
   }
 
   onSubmit() {
-      let {data, error} = {...this.state}
+      let {data, error, imagepaths} = {...this.state}
       let dataKeys = Object.keys(error)
         for(let i = 0; i< dataKeys.length; i++){
           if((data[dataKeys[i]] === "" || data[dataKeys[i]].length<1) && requiredKeys.includes(dataKeys[i])){
@@ -118,41 +105,43 @@ class ProfileSettings extends Component {
         if(checkedVal.includes(true)){
           this.setState({error: {...error}})
         }else{
+          let proData = {...data}
+          if(data.photo.length && !data.photo[0].name){
+            delete proData.photo
+           }
           let finalData = new FormData()
-          for (const key of Object.keys(data)){
-            if(key === "photo"){
-                finalData.append(`photo`,data.photo[0])
+          for (const key of Object.keys(proData)){
+            if(key === "photo"){               
+             finalData.append(`photo`,proData.photo[0])
+            }if(key === "slug"){
             }else{
-              finalData.append(key, data[key])
+              finalData.append(key, proData[key])
             }
           }
-          // if(this.id){
-          //   if(!data.image.length || !data.image[0].name){
-          //     finalData.delete("image")
-          //   }
-          //   if(!data.image_mobile.length || !data.image_mobile[0].name){
-          //     finalData.delete("image_mobile")
-          //   }
-          //   store.dispatch(editBanner(finalData))
+          store.dispatch(editUserProfile(finalData))
+          // if(this.props.getLoggedInUser.success && this.props.getLoggedInUser.success.data.name ){
+          //   console.log("edit")
+          //   store.dispatch(editUserProfile(finalData))
           // }else{
-          store.dispatch(postUserProfile(finalData))
+          //   console.log("post")
+          // store.dispatch(postUserProfile(finalData))
           // }
         }
   }
 
   componentDidUpdate(prevProps) {
-    let { postUserProfile } = this.props;
+    let { postUserProfile, getLoggedInUser } = this.props;
     if (postUserProfile !== prevProps.postUserProfile) {
         let { success } = postUserProfile;
         if (success) {
           store.dispatch(addSuccessMessage({
             message: { variant: `success`, message: "Your Profile is created. " || success.data.msg, title: `` }
           }))
-          let editable = success.data
-        let {...data} = editable
-        let pathImage =  { photo: [editable.photo] } 
-        data.photo = [editable.photo] 
-        this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
+        //   let editable = success.data
+        // let {...data} = editable
+        // let pathImage =  { photo: [editable.photo] } 
+        // data.photo = [editable.photo] 
+        // this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
           // store.dispatch(fetchBanner())
           // window.location.reload()
         }
@@ -169,6 +158,17 @@ class ProfileSettings extends Component {
     //   }
      
      }
+
+    if(prevProps.getLoggedInUser !== getLoggedInUser){
+      if(getLoggedInUser.success){
+        let editable = getLoggedInUser.success.data
+        let {...data} = editable
+        let pathImage = editable.photo ? { photo: [editable.photo] } : {photo: []}
+        data.photo = editable.photo ? [editable.photo] : []
+        this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
+      }
+    }
+     
   }
 
   generateQR = () => {
@@ -239,6 +239,7 @@ class ProfileSettings extends Component {
         type: "text",
         required: false,
         value: data.slug,
+        disabled: true
       }
     ]
 

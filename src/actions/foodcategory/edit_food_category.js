@@ -20,11 +20,11 @@ function _processing(processing) {
     return { type: 'DEACTIVATE_LOADING' }
 }
 
-export function editFoodCategory(data) {
+export function editFoodCategory(data,id) {
   return dispatch => {
     dispatch(_processing(true));
     let config = {
-      url: Config.BaseUrl + `/category`,
+      url: Config.BaseUrl + `/category/${id}`,
       method: "put",
       data: data,
       headers: {

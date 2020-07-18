@@ -23,10 +23,10 @@ import editFoodCategory from './food-category/edit-food-category';
 import postFoodCategory from './food-category/post-food-category';
 import deleteFoodCategory from './food-category/delete-food-category';
 
-import fetchCustomers from '../actions/customers/fetch_customers';
-import editCustomers from '../actions/customers/edit_customers';
-import postCustomers from '../actions/customers/post_customers';
-import deleteCustomers from '../actions/customers/delete_customers';
+import fetchCustomers from './customers/fetch-customers';
+import editCustomers from './customers/edit-customers';
+import postCustomers from './customers/post-customers';
+import deleteCustomers from './customers/delete-customers';
 
 const allReducers = combineReducers({
   loading, successMessage,

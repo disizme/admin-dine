@@ -29,7 +29,7 @@ class NewCategory extends Component {
     if(this.id){
       const {success} = this.props.fetchFoodCategory
       if(success && success.data){
-        let editable = success.data.find(i => i.id === parseInt(this.id))
+        let editable = success.data.results.find(i => i.id === parseInt(this.id))
           this.setState({data: editable })
         }else {
           this.props.history.push("/emenu/food-category")
@@ -64,7 +64,7 @@ class NewCategory extends Component {
       }else{
         this.setState({load: true})
         if(this.id){
-          store.dispatch(editFoodCategory(data))
+          store.dispatch(editFoodCategory(data,this.id))
         }else {
           store.dispatch(postFoodCategory(data))
         }
@@ -77,7 +77,7 @@ class NewCategory extends Component {
         let { success, error } = postFoodCategory;
         if (success) {
           store.dispatch(addSuccessMessage({
-            message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
+            message: { variant: `success`, message: success.data.message || success.data.msg || "Category Created", title: `` }
           }))
           store.dispatch(fetchFoodCategory())
           this.props.history.push("/emenu/food-category")
@@ -89,7 +89,7 @@ class NewCategory extends Component {
       let { success, error } = editFoodCategory;
       if (success) {
         store.dispatch(addSuccessMessage({
-          message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
+          message: { variant: `success`, message: success.data.message || success.data.msg || "Category Updated", title: `` }
         }))
         store.dispatch(fetchFoodCategory())
         this.props.history.push("/emenu/food-category")

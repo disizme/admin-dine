@@ -140,7 +140,7 @@ function Categories(props) {
   }
  
   function onDelete(id) {
-    // store.dispatch(deleteFoodCategory(id))
+    store.dispatch(deleteFoodCategory(id))
   }
 
   useEffect(() => {
@@ -170,7 +170,7 @@ function Categories(props) {
       let {success, error} = props.deleteFoodCategory;
       if (success) {
         store.dispatch(addSuccessMessage({
-          message: {variant: `success`, message: success.data.msg || success.data.message, title: ``}
+          message: {variant: `success`, message: success.data.msg || success.data.message || "Deleted successfully", title: ``}
         }))
         store.dispatch(deleteFoodCategoryReset())
         store.dispatch(fetchFoodCategory())

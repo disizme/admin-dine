@@ -1,4 +1,4 @@
-export default function postEvemsg
+export default function postCustomers
     (state = {error: null, success: null, processing: false}, action) {
 
     switch (action.type) {

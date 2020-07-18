@@ -50,7 +50,7 @@ export function fetchFoodCategory() {
       }).catch(error => {
         let response = errorHandler(error)
           store.dispatch(addSuccessMessage({
-            message: {variant: `error`, message: response.data, title: ``}
+            message: {variant: `error`, message: response ? response.data : "", title: ``}
           }))
           dispatch(_error({response:{status:500,data:response.data}}));
           dispatch(_processing(false));

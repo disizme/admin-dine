@@ -24,10 +24,11 @@ export function editUserSettings(data) {
   return dispatch => {
     dispatch(_processing(true));
     let config = {
-      url: Config.BaseUrl + `/profile/edit`,
-      method: "post",
+      url: Config.BaseUrl + `/reset-password`,
+      method: "put",
       data: data,
       headers: {
+        "Content-type": "multipart/form-data",
         'Authorization': 'Bearer ' + loginToken()
       }
     };

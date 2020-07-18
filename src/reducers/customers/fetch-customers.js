@@ -1,4 +1,4 @@
-export default function fetchEvemsg
+export default function fetchCustomers
     (state = {error: null, success: null, processing: false}, action) {
 
     switch (action.type) {

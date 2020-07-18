@@ -9,16 +9,18 @@ import postUserSettings from '../../../actions/userprofile/post_usersettings';
 let dataFormat = {
   // "username":"",
   "old_password": "",
-  "new_password": ""
+  "new_password": "",
+  "retype_password": ""
 }
 
 let errorFormat = {
   // "username": false,
-  "old_password": "",
-  "new_password": ""
+  "old_password": false,
+  "new_password": false,
+  "retype_password": false
 }
 
-let requiredKeys = [ "old_password", "new_password"]
+let requiredKeys = [ "old_password", "new_password", "retype_password"]
 
 class UpdateSetting extends Component {
   id = this.props.match.params.id
@@ -66,11 +68,17 @@ class UpdateSetting extends Component {
         this.setState({error: {...error}})
       }else{
         this.setState({load: true})
-        if(this.id){
-          store.dispatch(editUserSettings(data))
-        }else {
-          store.dispatch(postUserSettings(data))
+        let finalData = new FormData()
+        for (const key of Object.keys(data)){
+            finalData.append(key, data[key])
         }
+        store.dispatch(editUserSettings(finalData))
+
+        // if(this.id){
+        //   store.dispatch(editUserSettings(data))
+        // }else {
+        //   store.dispatch(postUserSettings(data))
+        // }
       }
   }
 
@@ -93,12 +101,11 @@ class UpdateSetting extends Component {
       let { success, error } = editUserSettings;
       if (success) {
         store.dispatch(addSuccessMessage({
-          message: { variant: `success`, message: success.data.message || success.data.msg, title: `` }
+          message: { variant: `success`, message: success.data.message || success.data.msg || "Password changed successfully.", title: `` }
         }))
         // store.dispatch(fetchCustomers())
-        // this.props.history.push("/customers")
-
         this.setState({data : {...dataFormat}, error: {...errorFormat}})
+        this.props.history.push("/")
       }
       else if (error) {
       }
@@ -122,7 +129,7 @@ class UpdateSetting extends Component {
         name: 'old_password',
         placeholder: 'Old Password',
         value: data.old_password,
-        type: 'text',
+        type: 'password',
         required: true,
         error: error.old_password
       },
@@ -130,9 +137,17 @@ class UpdateSetting extends Component {
         name: 'new_password',
         placeholder: 'New Password',
         value: data.new_password,
-        type: 'text',
+        type: 'password',
         required: true,
         error: error.new_password
+      },
+      {
+        name: 'retype_password',
+        placeholder: 'Retype Password',
+        value: data.retype_password,
+        type: 'password',
+        required: true,
+        error: error.retype_password
       }
     ]
     

@@ -42,7 +42,7 @@ export function getSignupRequest(data) {
 
       }).catch(error => {
         console.log(error.response)
-        let response = errorHandler(error)
+        let response = errorHandler(error, "login")
         store.dispatch(addSuccessMessage({
           message: {variant: `error`, message: response.data, title: ``}
         }))

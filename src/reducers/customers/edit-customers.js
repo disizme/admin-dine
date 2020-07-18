@@ -1,4 +1,4 @@
-export default function editEvemsg
+export default function editCustomers
     (state = {error: null, success: null, processing: false}, action) {
 
     switch (action.type) {

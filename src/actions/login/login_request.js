@@ -41,10 +41,11 @@ export function getLoginRequest(data) {
         dispatch(_success(res));
 
       }).catch(error => {
-        let response = errorHandler(error)
+        let response = errorHandler(error, "login")
         store.dispatch(addSuccessMessage({
           message: {variant: `error`, message: response.data, title: ``}
         }))
+
         dispatch(_error(error));
         dispatch(_processing(false));
       });

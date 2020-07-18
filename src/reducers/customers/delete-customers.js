@@ -1,4 +1,4 @@
-export default function deleteEvemsg
+export default function deleteCustomers
     (state = {error: null, success: null, processing: false}, action) {
 
     switch (action.type) {

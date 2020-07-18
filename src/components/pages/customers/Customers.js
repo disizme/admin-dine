@@ -14,10 +14,6 @@ import {fetchCustomers} from '../../../actions/customers/fetch_customers';
 
 const rows = [
   {
-    name: "id",
-    label: "ID"
-  },
-  {
     label: 'Name',
     name: 'name',
     // sortable: true
@@ -28,27 +24,31 @@ const rows = [
     // sortable: true
   },
   {
+    label: "Contact",
+    name: "phone_number"
+  },
+  {
     label: 'Address',
     name: 'address',
     // sortable: true
   },
-  {
-    label: "Action",
-    type: "action",
-    align: "left",
-    option: [
-      // {
-      //   type: 'edit',
-      //   action: 'onEdit',
-      //   index: 'id'
-      // },
-      {
-        type: 'delete',
-        action: 'onDelete',
-        index: 'id'
-      },
-    ]
-  }
+  // {
+  //   label: "Action",
+  //   type: "action",
+  //   align: "left",
+  //   option: [
+  //     // {
+  //     //   type: 'edit',
+  //     //   action: 'onEdit',
+  //     //   index: 'id'
+  //     // },
+  //     {
+  //       type: 'delete',
+  //       action: 'onDelete',
+  //       index: 'id'
+  //     },
+  //   ]
+  // }
 ]
 
 // const all_filters = [
@@ -181,7 +181,7 @@ function Customers(props) {
           fetch={(e) => fetch(e)}
           // onEdit={(e) => onEdit(e)}
           onDelete={(e) => onDelete(e)}
-          addNew={false}
+          hideNew={true}
           message={`Sorry, There are no records of customers currently.`}
           // onNew={() => {
           //   props.history.push("/customers/new")

@@ -186,7 +186,7 @@ const rows = [
   },
   {
     label: "Category",
-    name: "category",
+    name: "category_name",
     sortable: false,
     // type: 'variety',
     // option:[
@@ -367,7 +367,7 @@ function FoodItems(props) {
   }
  
   function onDelete(id) {
-    // store.dispatch(deleteFooditems(id))
+    store.dispatch(deleteFooditems(id))
   }
   
   function onDragStart(e, i) {
@@ -405,7 +405,7 @@ function FoodItems(props) {
       if (success.data) {
         // let x = { ...success.data }
         // let { data } = x;
-        setData(success.data.results)
+        setData(success.data)
         // setData(datajson)
         setMeta(meta)
       }else{
@@ -419,10 +419,10 @@ function FoodItems(props) {
       let {success, error} = props.deleteFoodItems;
       if (success) {
         store.dispatch(addSuccessMessage({
-          message: {variant: `success`, message: success.data.msg || success.data.message, title: ``}
+          message: {variant: `success`, message: success.data.msg || success.data.message || "Food Item Deleted.", title: ``}
         }))
-        // store.dispatch(deleteFooditemsReset())
-        // store.dispatch(fetchFooditems())
+        store.dispatch(deleteFooditemsReset())
+        store.dispatch(fetchFooditems())
         // fetch(attributes)
       }
       else if (error) {
@@ -439,7 +439,7 @@ function FoodItems(props) {
           hideNew={!creator}
           attributes={attributes}
           filters={filters}
-          fetch={(e) => fetch(e)}
+          fetch={(e) => {}}
           fetchList = {fetchList}
           currentFetch = {fetchType}
           onEdit={(e) => onEdit(e)}

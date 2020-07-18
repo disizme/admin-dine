@@ -13,6 +13,10 @@ function _error(error) {
   return {type: 'POST_USER_PROFILE_ERROR', error}
 }
 
+function _userreset(success){
+  return { type: 'FETCH_LOGGED_IN_USER_SUCCESS', success }
+}
+
 function _processing(processing) {
   if (processing)
     return { type: 'ACTIVATE_LOADING' }
@@ -35,7 +39,7 @@ export function postUserProfile(data) {
     axios(config).then(res => {
         dispatch(_processing(false));
         dispatch(_success(res));
-
+        dispatch(_userreset(res));
       }).catch(error => {
         let response = errorHandler(error)
           store.dispatch(addSuccessMessage({

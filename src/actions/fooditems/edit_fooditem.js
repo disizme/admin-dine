@@ -20,14 +20,15 @@ function _processing(processing) {
     return { type: 'DEACTIVATE_LOADING' }
 }
 
-export function editFooditems(data) {
+export function editFooditems(data, id) {
   return dispatch => {
     dispatch(_processing(true));
     let config = {
-      url: Config.BaseUrl + `/menu`,
+      url: Config.BaseUrl + `/menu/${id}`,
       method: "put",
       data: data,
       headers: {
+        "Content-type": "multipart/form-data",
         'Authorization': 'Bearer ' + loginToken()
       }
     };
