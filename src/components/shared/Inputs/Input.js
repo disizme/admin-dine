@@ -26,7 +26,9 @@ import {
 // } from '../../shared/helpers/GeneralHelpers';
 
 export function InputField(props) {
- 
+ let [touched, setTouched] = useState(false)
+  let [open, setOpen] = useState({})
+
   if(!props.input){
     let {name, onChange, value} = props
     return <Row>
@@ -69,8 +71,7 @@ export function InputField(props) {
 
   }else{
     const {icon, name,dropdown_name, placeholder, type, sub_type, value,dropdown_value, error, option, required, acceptable, multiple, disabled} = props.input
-  let [touched, setTouched] = useState(false)
-  let [open, setOpen] = useState({})
+  
 
   function onChange(e) {
     setTouched(true)
