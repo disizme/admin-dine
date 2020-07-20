@@ -1,7 +1,7 @@
 export const Config = {
     Title: `Dinemate App`,
-    BaseUrl: window.location.host.includes("localhost") ? "http://127.0.0.1:8000/api" : `${window.location.origin}/api`,
-    urlbase: window.location.host.includes("localhost") ? "http://127.0.0.1:8000" : window.location.origin, 
-    qr_url: `${window.location.origin}/customer-dine`
+    BaseUrl: window.location.host.includes("localhost") ? "http://127.0.0.1:8000/api" : `https://api.dinemate.com.au/api`,
+    urlbase: window.location.host.includes("localhost") ? "http://127.0.0.1:8000" : "http://api.dinemate.com.au/", 
+    qr_url: `http://admin.dinemate.com.au/customer-dine`
 }
 
