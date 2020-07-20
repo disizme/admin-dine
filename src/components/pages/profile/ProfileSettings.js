@@ -9,6 +9,9 @@ import getLoggedInUser from '../../../actions/login/get_logged_in_user';
 import postUserProfile from '../../../actions/userprofile/post_userprofile';
 import UpdateSetting from './UpdateSetting';
 import editUserProfile from '../../../actions/userprofile/edit_userprofile';
+import { Config } from '../../../Config';
+import PrintDoc from './PDFGen';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 
 let dataFormat = {
   photo: [],
@@ -46,6 +49,7 @@ class ProfileSettings extends Component {
         let {...data} = editable
         let pathImage = editable.photo ? { photo: [editable.photo] } : {photo: []}
         data.photo = editable.photo ? [editable.photo] : []
+        data.slug = Config.qr_url+ "/" + editable.slug + "/menu"
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
     }else{
       store.dispatch(getLoggedInUser())
@@ -165,6 +169,7 @@ class ProfileSettings extends Component {
         let {...data} = editable
         let pathImage = editable.photo ? { photo: [editable.photo] } : {photo: []}
         data.photo = editable.photo ? [editable.photo] : []
+        data.slug = Config.qr_url+ "/" + editable.slug + "/menu"
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
       }
     }
@@ -274,18 +279,13 @@ class ProfileSettings extends Component {
                 <CardBody className="p-4">
                   <div className="text-center">
                   {!this.state.qrshow ? <Button className="brand-btn" onClick={() => {this.generateQR()}}>
-                    Generate QR Code
+                    Generate Instructions
                   </Button>
-                  : <div className="row">
-                    <div className="col-6">
-                    <h3>Menu</h3>
-                  <QRGen slug={this.state.slugdata} pagefor={"menu"} />
-                    </div>
-                    <div className="col-6">
-                    <h3>Check In</h3>
-                  <QRGen slug={this.state.slugdata} pagefor={"checkin"} />
-                      </div>
+                  : <>
+                  <div className="mx-auto">
+                  <QRGen slug={this.state.slugdata} pagefor={"checkin"} data={this.props.getLoggedInUser.success.data} />
                   </div>
+                  </>
                   }
                   </div>
                 </CardBody>

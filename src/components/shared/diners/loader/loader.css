@@ -1,0 +1,28 @@
+.full-page-loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1029;
+  }
+  .full-page-loader-container>div {
+    margin: 0 auto;
+    display: table;
+    position: relative;
+    margin-top: -32px;
+    top: 50%;
+    color: white;
+    font-size: 19px;
+    background-color: rgba(3,3,3,0.8);
+    border-radius: 4px;
+  }
+  .full-page-loader-container>div>span:FIRST-CHILD {
+    margin-right: 11px;
+  }
+  .full-page-loader-container>div>span {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 20px;
+  }
+  

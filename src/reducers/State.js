@@ -28,14 +28,26 @@ import editCustomers from './customers/edit-customers';
 import postCustomers from './customers/post-customers';
 import deleteCustomers from './customers/delete-customers';
 
+import fetchHourCount from './data-visual/fetch-hourcount';
+import fetchDayCount from './data-visual/fetch-daycount';
+import fetchMonthCount from './data-visual/fetch-monthcount';
+import fetchPercentile from './data-visual/fetch-percentile';
+
+import userProfile from './diners/admin/user-profile';
+import fetchCategory from './diners/category/fetch-category';
+import fetchFoodMenu from './diners/foodmenu/fetch-foodmenu';
+import customerCheckin from './diners/customer/customer-checkin';
+import customerOrder from './diners/customer/customer-order';
+
 const allReducers = combineReducers({
   loading, successMessage,
+  userProfile, fetchCategory, fetchFoodMenu,  customerCheckin, customerOrder,
+  fetchHourCount, fetchDayCount, fetchMonthCount, fetchPercentile,
   postUserProfile, editUserProfile, postUserSettings, editUserSettings,
   fetchFoodItems, editFoodItems, postFoodItems, deleteFoodItems,
   fetchFoodCategory, editFoodCategory, postFoodCategory, deleteFoodCategory,
   fetchCustomers, editCustomers, postCustomers, deleteCustomers,
   getLoginRequest, getLoggedInUser, getSignupRequest,
 });
-
 
 export default allReducers;

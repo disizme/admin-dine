@@ -333,6 +333,10 @@ const localFilter = {
 }
 // const fetchList = ["all","home", "rashifal", "home-down", "paramarsha"]
 
+function getFiltered(data, val){
+    return data.filter(i => i.name.toLowerCase().includes(val))
+}
+
 function FoodItems(props) {
   const [attributes, setAttributes] = useState({sort_field :"display_order", sort_by: "asc"})
   const [data, setData] = useState(datajson)
@@ -354,14 +358,27 @@ function FoodItems(props) {
     setFilters(_filters)
   }
 
-  function fetch(_attributes) {
-      if(_attributes.filter && _attributes.filter.status){
-        _attributes = { ...attributes, "limit": meta.total }
-      }
-      setAttributes(_attributes)
-      // store.dispatch(fetchFoodItems(_attributes))
+  function fetch(e) {
+    if(e){
+      let filtered = getFiltered(props.fetchFoodItems.success.data, e)
+      setData(filtered)
+    }else {
+      setData(props.fetchFoodItems.success.data)
+    }
   }
 
+  function updateFetch(key,val){
+    if(key==="value"){
+      setFetchList({...fetchList, "value": val, "search": false })
+    }else if(key==="search"){
+      fetch(fetchList.value)
+      setFetchList({...fetchList, "search": true })
+    }else if(key==="dropdown"){
+      setFetchType(val)
+      setFetchList({...fetchList, "search": false })
+    }
+  }
+  
   function onEdit(id) {
     props.history.push(`/emenu/food-items/${id}/edit`)
   }
@@ -442,6 +459,7 @@ function FoodItems(props) {
           fetch={(e) => {}}
           fetchList = {fetchList}
           currentFetch = {fetchType}
+          updateFetch = {(e,i) => updateFetch(e,i)}
           onEdit={(e) => onEdit(e)}
           onDelete={(e) => onDelete(e)}
           draggable={true}

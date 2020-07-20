@@ -16,7 +16,7 @@ class DefaultFooter extends Component {
     return (
       <React.Fragment>
         <span className="ml-auto">      
-        <a href="https://beta.nepalipatro.com.np">Dinemate</a> &copy; {new Date().getFullYear()} </span>
+        <a href="https://dinemate.com.au">Dinemate</a> &copy; {new Date().getFullYear()} </span>
       </React.Fragment>
     );
   }

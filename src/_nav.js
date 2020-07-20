@@ -32,7 +32,7 @@ export default {
     },
     {
       name: "Settings",
-      icon: "fa fa-cogs",
+      icon: "icon-settings",
       url: '/settings',
     }
     // {
