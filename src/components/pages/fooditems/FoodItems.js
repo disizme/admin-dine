@@ -177,9 +177,14 @@ const datajson = [    {
 
 const rows = [
   {
-    name: "id",
-    label: "ID"
+    name: "index",
+    label: "SN",
+    type: "index"
   },
+  // {
+  //   name: "id",
+  //   label: "ID"
+  // },
   {
     label: "Name",
     name: "name",

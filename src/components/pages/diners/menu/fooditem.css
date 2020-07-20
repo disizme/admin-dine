@@ -74,6 +74,9 @@
 }
 
 @media (max-width: 480px){
+    .each-item{
+        min-height: 110px;
+    }
     .info-card{
         position: relative;
         text-align: right;

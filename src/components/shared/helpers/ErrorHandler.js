@@ -1,7 +1,7 @@
 import { tokenInterception } from "./AuthenticationHelper"
 
 export const errorHandler = (error, org) => {
-    if (error.response.status === 401 && org !== "login"){
+    if (error && error.response && error.response.status === 401 && org !== "login"){
         tokenInterception()
         return { data: "Refreshing Token"}
     }else if (error.toString() === "Error: Network Error" || !error.response) {

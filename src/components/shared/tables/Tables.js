@@ -641,7 +641,11 @@ function Tables(props) {
                     onDrop={e => props.onDrop(e, i)}>
                       {
                         rows.map(p => {
-                          if (p.type === "action") {
+                          if(p.type === "index"){
+                            return <td>
+                              {i+1}
+                            </td>
+                          } else if (p.type === "action") {
                             return <td style={p.align && { textAlign: p.align }} key={i+"-action"}>
                               {p.option && p.option.map((x, y) => {
                                 if (x.type && x.type === "edit") {
