@@ -19,7 +19,7 @@ import navigation from '../../_nav';
 import routes from '../../routes';
 import BounceLoader from "../../components/shared/loaders/BounceLoader";
 
-const DefaultAside = React.lazy(() => import('./DefaultAside'));
+// const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
@@ -118,11 +118,11 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
+          {/* <AppAside fixed>
             <Suspense fallback={this.loading()}>
               <DefaultAside />
             </Suspense>
-          </AppAside>
+          </AppAside> */}
         </div>
         <AppFooter>
           <Suspense fallback={this.loading()}>
