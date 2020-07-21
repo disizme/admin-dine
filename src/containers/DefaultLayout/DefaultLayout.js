@@ -23,54 +23,54 @@ const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
-function filterNav(permissions){
-  let navOption = navigation.items.filter(i => {
-    let allowedPerm = permissions.find(j => {
-      if (i.allowed) {
-        return j.name === i.allowed
-      } else {
-        let childs = [...i.children]
-        let childOptions = childs.filter(k => {
-          let allowedChild = permissions.find(j => j.name === k.allowed)
-          if (allowedChild) { return k }
-          else { return false }
-        })
-        i.children = childOptions
-        return childOptions.length > 0
-      }
-    })
-    if (allowedPerm) {
-      return i
-    } else if (i.name === "Dashboard") {
-      return i
-    } else return false
-  })
+// function filterNav(permissions){
+//   let navOption = navigation.items.filter(i => {
+//     let allowedPerm = permissions.find(j => {
+//       if (i.allowed) {
+//         return j.name === i.allowed
+//       } else {
+//         let childs = [...i.children]
+//         let childOptions = childs.filter(k => {
+//           let allowedChild = permissions.find(j => j.name === k.allowed)
+//           if (allowedChild) { return k }
+//           else { return false }
+//         })
+//         i.children = childOptions
+//         return childOptions.length > 0
+//       }
+//     })
+//     if (allowedPerm) {
+//       return i
+//     } else if (i.name === "Dashboard") {
+//       return i
+//     } else return false
+//   })
 
-  return {items: navOption}
-}
+//   return {items: navOption}
+// }
 
 class DefaultLayout extends Component {
   state = {
     navConfig: navigation
   }
 
-  componentDidMount(){
-    const { permissions } = this.props.getLoggedInUser
-    if(permissions){
-      let navs = filterNav(permissions)
-      this.setState({navConfig : navs})
-    }
-  }
+  // componentDidMount(){
+  //   const { permissions } = this.props.getLoggedInUser
+  //   if(permissions){
+  //     let navs = filterNav(permissions)
+  //     this.setState({navConfig : navs})
+  //   }
+  // }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.getLoggedInUser !== prevProps.getLoggedInUser) {
-      const { permissions } = this.props.getLoggedInUser
-      if(permissions){
-        let navs = filterNav(permissions)
-        this.setState({navConfig : navs})
-      }
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.getLoggedInUser !== prevProps.getLoggedInUser) {
+  //     const { permissions } = this.props.getLoggedInUser
+  //     if(permissions){
+  //       let navs = filterNav(permissions)
+  //       this.setState({navConfig : navs})
+  //     }
+  //   }
+  // }
 
   loading = () => <BounceLoader margin="0px"/>
 
