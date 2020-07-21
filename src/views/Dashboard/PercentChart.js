@@ -63,7 +63,7 @@ function PercentChart(props){
       </Col>
     </Row>
     <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-      <Pie data={pie} height={300}/>
+      <Pie data={pie} height={200}/>
     </div>
   </CardBody>
 </Card>

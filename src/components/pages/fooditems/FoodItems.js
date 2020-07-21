@@ -7,6 +7,7 @@ import { Card, CardBody } from "reactstrap";
 import {deleteFooditems, deleteFooditemsReset } from '../../../actions/fooditems/delete_fooditem';
 import {fetchFooditems} from '../../../actions/fooditems/fetch_fooditem';
 import fetchFoodCategory from '../../../actions/foodcategory/fetch_food_category';
+import { reorderFooditems } from '../../../actions/fooditems/reorder_fooditem';
 
 // import TabPage from '../../shared/tables/TabPage';
 // import { Inputs } from './bannerRoutes';
@@ -406,8 +407,12 @@ function FoodItems(props) {
     let a = update[idx]
     update.splice(idx, 1)
     update.splice(i, 0, a)
-    setData(update)
-    setMeta({})
+    let reorder = update.map(i => i.id)
+    let reorderData = new FormData()
+    reorderData.append(`order`,reorder)
+    store.dispatch(reorderFooditems(reorderData))
+    // setData(update)
+    // setMeta({})
   }
 
   useEffect(() => {

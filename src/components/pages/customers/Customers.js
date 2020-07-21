@@ -14,6 +14,11 @@ import {fetchCustomers} from '../../../actions/customers/fetch_customers';
 
 const rows = [
   {
+    label: "SN",
+    type: "index",
+    name: "index"
+  },
+  {
     label: 'Name',
     name: 'name',
     // sortable: true

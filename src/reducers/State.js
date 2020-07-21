@@ -39,6 +39,9 @@ import fetchFoodMenu from './diners/foodmenu/fetch-foodmenu';
 import customerCheckin from './diners/customer/customer-checkin';
 import customerOrder from './diners/customer/customer-order';
 
+import reorderFoodCategory from './food-category/reorder-food-category';
+import reorderFoodItems from './fooditems/reorder-fooditems';
+
 const allReducers = combineReducers({
   loading, successMessage,
   userProfile, fetchCategory, fetchFoodMenu,  customerCheckin, customerOrder,
@@ -46,6 +49,7 @@ const allReducers = combineReducers({
   postUserProfile, editUserProfile, postUserSettings, editUserSettings,
   fetchFoodItems, editFoodItems, postFoodItems, deleteFoodItems,
   fetchFoodCategory, editFoodCategory, postFoodCategory, deleteFoodCategory,
+  reorderFoodCategory, reorderFoodItems,
   fetchCustomers, editCustomers, postCustomers, deleteCustomers,
   getLoginRequest, getLoggedInUser, getSignupRequest,
 });

@@ -6,6 +6,7 @@ import { addSuccessMessage } from "../../../actions/successMessage/success_messa
 import { Card, CardBody } from "reactstrap";
 import deleteFoodCategory, { deleteFoodCategoryReset } from '../../../actions/foodcategory/delete_food_category';
 import fetchFoodCategory from '../../../actions/foodcategory/fetch_food_category';
+import reorderFoodCategory from '../../../actions/foodcategory/reorder_food_category';
 // import fetchFoodCategory from '../../../actions/rashifal/fetch_rashifal';
 // import { deleteFoodCategory, deleteRashifalReset } from '../../../actions/rashifal/delete_rashifal';
 // import fetchRashiAuthor from '../../../actions/rashiauthor/fetch_rashi_author';
@@ -148,6 +149,29 @@ function Categories(props) {
     store.dispatch(deleteFoodCategory(id))
   }
 
+  
+  function onDragStart(e, i) {
+    e.dataTransfer.setData('idx', i)
+  }
+
+  function onDragOver(e) {
+    e.preventDefault()
+  }
+
+  function onDrop(e, i) {
+    let idx = e.dataTransfer.getData('idx')
+    let update = data
+    let a = update[idx]
+    update.splice(idx, 1)
+    update.splice(i, 0, a)
+    let reorder = update.map(i => i.id)
+    let reorderData = new FormData()
+    reorderData.append(`order`,reorder)
+    store.dispatch(reorderFoodCategory(reorderData, props.fetchFoodCategory.success))
+    // setData(update)
+    // setMeta({})
+  }
+
   useEffect(() => {
     if(!props.fetchFoodCategory.success){
       store.dispatch(fetchFoodCategory())
@@ -196,6 +220,10 @@ function Categories(props) {
           attributes={attributes}
           filters={filters}
           fetch={(e) => {}}
+          draggable={true}
+          onDragStart={(e,i) => onDragStart(e,i)}
+          onDragOver={(e) => onDragOver(e)}
+          onDrop={(e,i) => onDrop(e,i)}
           onEdit={(e) => onEdit(e)}
           onDelete={(e) => onDelete(e)}
           message={`Sorry, There are no records of food categories.`}

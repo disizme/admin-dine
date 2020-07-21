@@ -642,7 +642,7 @@ function Tables(props) {
                       {
                         rows.map(p => {
                           if(p.type === "index"){
-                            return <td>
+                            return <td key={i+"-index"}>
                               {i+1}
                             </td>
                           } else if (p.type === "action") {
