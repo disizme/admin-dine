@@ -22,7 +22,7 @@ class CheckIn extends Component{
       data: {
         name: "",
         email: "",
-        address:"",
+        // address:"",
         phone_number: "",
         postcode: ""
       }
@@ -76,19 +76,19 @@ class CheckIn extends Component{
           value: data.email,
           required: true,
         },
-        {
-          name: "address",
-          placeholder: "Address",
-          type: "text",
-          value: data.address,
-          required: true,
-        },
+        // {
+        //   name: "address",
+        //   placeholder: "Address",
+        //   type: "text",
+        //   value: data.address,
+        //   required: true,
+        // },
         {
           name: "phone_number",
           placeholder: "Contact No.",
           type: "tel",
           value: data.phone_number,
-          pattern: "[0-9]{10}",
+          pattern: "[0-9]{7,10}",
           required: true
         },
         {
@@ -97,7 +97,7 @@ class CheckIn extends Component{
           type: "text",
           value: data.postcode,
           required: true,
-          pattern: "[0-9]{5}"
+          pattern: "[0-9]{4}"
         }
       ]
 

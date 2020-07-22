@@ -118,7 +118,7 @@ function FoodMenu(props) {
         // }
     }
     return <div className="App">
-        <TopHeader />
+        {/* <TopHeader /> */}
             <div className="restro-theme" >
                 <Card className="mx-auto">
                     <CardBody>

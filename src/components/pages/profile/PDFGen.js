@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 40,
         left: 40,
-        width: 60,
-        height: 60
+        width: 100,
+        height: 70
     },
     row: { display: "flex", flexDirection: "row", flexWrap: 'wrap',fontSize: 10},
     column: { display: "flex", flexDirection: "column", flexWrap: 'wrap',flexBasis: '49%',paddingHorizontal: 8},

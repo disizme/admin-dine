@@ -28,7 +28,9 @@ class DefaultHeader extends Component {
         <AppNavbarBrand className='nav-brand'>
           {/* // full={{ src: logo, width: "40px", height: "40px", alt: 'Dinemate' }}
           // minimized={{ src: logo, width: "40px", height: "40px", alt: 'Dinemate' }} */}
-        <h4 className="ml-5"><span className="brand-color">Dine</span>Mate </h4>
+        <h4 className="ml-5">
+          <img src={logo} style={{width: "100px"}}/>
+        </h4>
         </AppNavbarBrand>
         {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
         <Nav className="d-md-down-none" navbar>
