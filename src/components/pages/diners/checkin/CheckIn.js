@@ -110,7 +110,7 @@ class CheckIn extends Component{
               <MainLogo className="text-center"
                 photo={this.props.userProfile.success ? this.props.userProfile.success.data.photo : null} />
                 <div className="text-center">
-                  <div>{this.props.userProfile.success ? this.props.userProfile.success.data.name : ""} </div>
+                  <h4>{this.props.userProfile.success ? this.props.userProfile.success.data.name : ""} </h4>
                   <p className="text-muted">Please Check-in</p>
                 </div>
                 <Form className="px-2" onSubmit={(e) => this.onSubmit(e)}>

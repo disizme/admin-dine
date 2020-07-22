@@ -32,6 +32,11 @@ export function fetchFoodMenu(slug) {
     // setTimeout(() => {
       axios(config).then(res => {
         dispatch(_processing(false));
+        let ims = res.data.results && res.data.results.map(i => {
+          i["image"] = Config.urlbase+i.image
+          return i
+        })
+        res.data.results = ims
         dispatch(_success(res));
 
       }).catch(error => {

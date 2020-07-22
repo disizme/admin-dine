@@ -406,10 +406,10 @@ html{
   margin: 0.5em auto;
 }
 .brand-logo img{
-  height: 60px;
-  width: 60px;
+  height: 80px;
+  // width: 80px;
   border-radius: 5px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .round-input{

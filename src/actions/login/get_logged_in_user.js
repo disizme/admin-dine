@@ -31,6 +31,7 @@ export function getLoggedInUser(userdata)
                     let ims = { ...res.data }
                     ims["photo"] = ims.photo ? Config.urlbase+ ims.photo : ims.photo
                     res["data"] = ims
+                    // console.log(res)
                     dispatch(_success(res));
                     dispatch(_processing(false));
                 }).catch(function(error){

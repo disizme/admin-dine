@@ -6,25 +6,39 @@ import { Card, CardBody, Row, Col, CardTitle } from 'reactstrap';
 import { Line, Pie } from 'react-chartjs-2';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
-const brandInfo = getStyle('--success')
+const brandInfo = getStyle('--info')
 
-var pie = {
-  labels: [
-    'Red',
-    'Blue'
-  ],
+// var pie = {
+//   labels: [
+//     'Red',
+//     'Blue'
+//   ],
+//   datasets: [
+//     {
+//       data: [],
+//       backgroundColor: [
+//         '#FF6384',
+//         '#36A2EB',
+//       ],
+//       hoverBackgroundColor: [
+//         '#FF6384',
+//         '#36A2EB',
+//       ],
+//     }],
+// };
+
+var mainChart = {
+  labels: [],
   datasets: [
     {
+      label: "Increase in Customers (%)",
+      backgroundColor: hexToRgba(brandInfo, 10),
+      borderColor: brandInfo,
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
       data: [],
-      backgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-      ],
-      hoverBackgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-      ],
-    }],
+    }
+  ]
 };
 
 
@@ -44,7 +58,9 @@ function PercentChart(props){
     if (error) {
     } else if (success) {
       if (success.data) {
-          pie.datasets[0].data= [success.data.inc_per, 100-success.data.inc_per]
+          // pie.datasets[0].data= [success.data.inc_per, 100-success.data.inc_per]
+          mainChart.labels = success.data.labels.map(i => i.substring(0,2))
+          mainChart.datasets[0].data = success.data.data
           setData(success.data)
       }else{
         setData([])
@@ -63,7 +79,8 @@ function PercentChart(props){
       </Col>
     </Row>
     <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-      <Pie data={pie} height={200}/>
+      {/* <Pie data={pie} height={200}/> */}
+      <Line data={mainChart} options={props.option} height={300} />
     </div>
   </CardBody>
 </Card>

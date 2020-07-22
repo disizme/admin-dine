@@ -29,7 +29,7 @@ class DefaultHeader extends Component {
           {/* // full={{ src: logo, width: "40px", height: "40px", alt: 'Dinemate' }}
           // minimized={{ src: logo, width: "40px", height: "40px", alt: 'Dinemate' }} */}
         <h4 className="ml-5">
-          <img src={logo} style={{width: "100px"}}/>
+          <img src={logo} className="ml-1" style={{height: "70px"}}/>
         </h4>
         </AppNavbarBrand>
         {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}

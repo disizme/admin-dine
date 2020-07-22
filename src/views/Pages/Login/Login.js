@@ -116,7 +116,7 @@ class Login extends Component {
                           Login
                           </Button>
                         <br/>
-                        <Button  type='button' color="link" className="px-0" active tabIndex={-1}>Forgot Password?</Button>
+                        {/* <Button  type='button' color="link" className="px-0" active tabIndex={-1}>Forgot Password?</Button> */}
                       </p>
                       <div>
                       </div>
@@ -124,7 +124,7 @@ class Login extends Component {
                         Don't Have an Account?
                           <p>
                           <Link to="/register">
-                            <Button  type='button' color="link" className="px-0" active tabIndex={-1}>Sign Up Here!</Button>
+                            <Button  type='button' color="link" className="brand-color px-0" active tabIndex={-1}>Sign Up Here!</Button>
                           </Link>
                         </p>
                       </div>

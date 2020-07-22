@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: "bold",
         marginHorizontal: 'auto',
-        marginBottom: 20
+        marginBottom: 20,
+        marginTop: 10
     },
     cautionStyle: {
         fontSize: 22,
@@ -38,12 +39,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 'auto',
     },
     logoStyle: {
-        width: 100,
+        // width: 100,
         height: 100,
         objectFit: 'cover',
         marginHorizontal: 'auto',
         borderRadius: 10,
-        marginBottom: 10
+        marginBottom: 15
     },
     footerLink: {
         position: 'absolute',
@@ -65,9 +66,9 @@ const styles = StyleSheet.create({
 function GetCheckInPage(props){
     return <Page size="A4" style={styles.pageStyle}>
     <View style={{marginHorizontal: '8%', marginVertical: 'auto'}}>
-        <View style={styles.headerStyle}>
+        <View>
                 <Image src={props.photo} style={styles.logoStyle} />
-                <Text>{props.name}</Text>
+                <Text  style={styles.headerStyle}>{props.name}</Text>
         </View>
         <View style={styles.cautionStyle}>
                 <Text style={{marginBottom: "10"}}>Welcome</Text>
@@ -89,9 +90,9 @@ function GetCheckInPage(props){
 function GetMenuPage(props){
     return <Page size="A4" style={styles.pageStyle}>
     <View style={{marginHorizontal: '8%', marginVertical: 'auto'}}>
-        <View style={styles.headerStyle}>
+        <View>
                 <Image src={props.photo} style={styles.logoStyle} />
-                <Text>{props.name}</Text>
+                <Text style={styles.headerStyle}>{props.name}</Text>
         </View>
         <View style={styles.cautionStyle}>
                 <Text style={{fontWeight: "bold"}}>Our Menu</Text>

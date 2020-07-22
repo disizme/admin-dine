@@ -38,6 +38,9 @@ export function postUserProfile(data) {
     };
     axios(config).then(res => {
         dispatch(_processing(false));
+        let ims = { ...res.data }
+        ims["photo"] = ims.photo ? Config.urlbase+ ims.photo : ims.photo
+        res["data"] = ims
         dispatch(_success(res));
         dispatch(_userreset(res));
       }).catch(error => {

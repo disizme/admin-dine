@@ -31,12 +31,7 @@ const rows = [
   {
     label: "Contact",
     name: "phone_number"
-  },
-  {
-    label: 'Address',
-    name: 'address',
-    // sortable: true
-  },
+  }
   // {
   //   label: "Action",
   //   type: "action",

@@ -22,7 +22,7 @@ function _processing(processing) {
 }
 
 export function customerCheckin(data,slug) {
-  console.log( "slug",slug)
+  // console.log( "slug",slug)
   return dispatch => {
     dispatch(_processing(true));
     let config = {
@@ -38,7 +38,7 @@ export function customerCheckin(data,slug) {
     };
     // setTimeout(() => {
       axios(config).then(res => {
-        console.log(res)
+        // console.log(res)
         dispatch(_processing(false));
         dispatch(_success(res));
 

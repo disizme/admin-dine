@@ -122,9 +122,9 @@ function FoodMenu(props) {
             <div className="restro-theme" >
                 <Card className="mx-auto">
                     <CardBody>
-                    <h3>
                     <MainLogo photo={props.userProfile.success ? props.userProfile.success.data.photo : null} 
-                        className="d-inline-block mr-1 my-0" />
+                        className="text-center my-0" />
+                    <h3>
                         {props.userProfile.success && props.userProfile.success.data.name}</h3>
                     {/* <div>
                         Pizza and Fast Foods
