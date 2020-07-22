@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "./fooditem.css"
 import foodimg from "../../../shared/diners/media/fooditem.jpeg"
 import lozad from 'lozad'
-const placeholdImg = "/images/placeholder.png"
+import placeholdImg from "../../../../assets/img/imgplace.png"
 
 class FoodItem extends Component{
     constructor(props){
@@ -45,6 +45,9 @@ class FoodItem extends Component{
                 <div className="food-img">
                     <img data-src={image}
                      src={placeholdImg} 
+                     onError={(e) => {
+                        e.target.onerror = null 
+                        e.target.src = placeholdImg}}
                      className="lozad" alt="item"/>
                 </div>
                 <div className="food-heading mr-auto">

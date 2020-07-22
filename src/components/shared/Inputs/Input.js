@@ -24,6 +24,8 @@ import {
 //   isInvalidPhoneNumber,
 //   containsOnlyLetter
 // } from '../../shared/helpers/GeneralHelpers';
+import fallbackImg from '../../../assets/img/imgplace.png';
+
 
 export function InputField(props) {
  let [touched, setTouched] = useState(false)
@@ -235,7 +237,11 @@ export function InputField(props) {
       {/* <Row className="px-3"> */}
       <InputGroup className='mb-3'>
         {props.impaths[name] && props.impaths[name].map((i, index) => {
-          return <div key={index} className="doc-container mb-3"><img alt={`name-${index}`} src={i}
+          return <div key={index} className="doc-container mb-3">
+            <img alt={`name-${index}`} src={i}
+              onError={(e) => {
+                e.target.onerror = null 
+                e.target.src = fallbackImg}}
              className='uploadedDoc' />
             {!disabled && <i className="icon-close remove-upload"
             onClick={() => props.onRemove({index: index, name: name})}
