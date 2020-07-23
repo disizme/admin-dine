@@ -228,6 +228,7 @@ class ProfileSettings extends Component {
         name: "postal",
         placeholder: "Postal",
         type: "text",
+        pattern: "[0-9{4}",
         required: false,
         value: data.postal,
       },

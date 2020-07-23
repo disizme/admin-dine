@@ -442,8 +442,8 @@ const mainChartOpts = {
         ticks: {
           beginAtZero: true,
           maxTicksLimit: 5,
-          stepSize: Math.ceil(10 / 5),
-          max: 20,
+          stepSize: Math.ceil(20 / 5),
+          // max: 200,
         },
       }],
   },
