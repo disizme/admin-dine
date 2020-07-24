@@ -32,6 +32,8 @@ class CheckIn extends Component{
     componentDidMount(){
         if(!this.props.userProfile.success){
             store.dispatch(userProfile(this.slug))
+        }else{
+          document.title = this.props.userProfile.success.data.name + ' | Check-In'
         }
     }
 
@@ -49,12 +51,17 @@ class CheckIn extends Component{
     }
 
     componentDidUpdate(prevProps){
-      let { customerCheckin } = this.props;
+      let { customerCheckin, userProfile } = this.props;
       if (customerCheckin !== prevProps.customerCheckin) {
           let { success, error } = customerCheckin;
           if(success){
             this.props.history.push(`/customer-dine/${this.slug}/menu`)
         }else if(error){
+        }
+      }
+      if(userProfile !== prevProps.userProfile){
+        if(userProfile.success){
+          document.title = userProfile.success.data.name + ' | Check-In'
         }
       }
     }

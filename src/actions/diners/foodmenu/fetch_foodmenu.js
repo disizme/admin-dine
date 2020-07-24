@@ -33,7 +33,7 @@ export function fetchFoodMenu(slug) {
       axios(config).then(res => {
         dispatch(_processing(false));
         let ims = res.data.results && res.data.results.map(i => {
-          i["image"] = Config.urlbase+i.image
+          i["image"] = i.image ? Config.urlbase+i.image : null
           return i
         })
         res.data.results = ims

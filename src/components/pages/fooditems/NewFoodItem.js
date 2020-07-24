@@ -13,17 +13,19 @@ let dataFormat = {
   "name" : "",
   "price" : "",
   "description" : "",
+  "category_name": "",
   "image" : []
 }
 
 let errorFormat = {
   "name" : false,
   "price" : false,
-  "description" : false,
-  "image" : false
+  // "description" : false,
+  "category_name": false,
+  // "image" : false
 }
 
-let requiredKeys = [ "name", "price", "description", "image"]
+let requiredKeys = [ "name", "price", "category_name"]
 
 class NewFoodItem extends Component {
   id = this.props.match.params.id
@@ -41,8 +43,8 @@ class NewFoodItem extends Component {
         let editable = success.data.find(i => i.id === parseInt(this.id))
         if(editable){
           let {...data} = editable
-          let pathImage = { image: [editable.image] }
-          data.image = [editable.image]
+          let pathImage = { image: editable.image ? [editable.image] : null}
+          data.image = editable.image ? [editable.image] : []
           this.setState({
               data: {...this.state.data, ...data},
             imagepaths: pathImage 
@@ -105,12 +107,16 @@ class NewFoodItem extends Component {
         if(checkedVal.includes(true)){
           this.setState({error: {...error}})
         }else{
+          let proData = { ...data }
+          if(!data.image.length || (data.image.length && !data.image[0].name)){
+            delete proData.image
+           }
           let finalData = new FormData()
-          for (const key of Object.keys(data)){
+          for (const key of Object.keys(proData)){
             if(key === "image"){
-                finalData.append(`image`,data.image[0])
+                finalData.append(`image`,proData.image[0])
             }else{
-              finalData.append(key, data[key])
+              finalData.append(key, proData[key])
             }
           }
           if(this.id){
@@ -169,7 +175,7 @@ class NewFoodItem extends Component {
         multiple: false,
         error: error.image,
         type: "file",
-        required: this.id ? false : true,
+        // required: this.id ? false : true,
         icon: "icon-cloud-upload",
         // disabled: this.id ? true : false,
         acceptable: "image/jpeg,image/gif,image/png,image/x-eps"
@@ -205,7 +211,7 @@ class NewFoodItem extends Component {
         name: "price",
         placeholder: "Price (AUD)",
         type: "number",
-        required: false,
+        required: true,
         value: data.price,
       },
     ]    

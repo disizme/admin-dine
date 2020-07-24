@@ -31,6 +31,14 @@ const rows = [
   {
     label: "Contact",
     name: "phone_number"
+  },
+  {
+    label: "Date",
+    name: "check_in"
+  },
+  {
+    label: "Time",
+    name: "check_in_time"
   }
   // {
   //   label: "Action",
@@ -143,9 +151,16 @@ function Customers(props) {
       //   }
       // }
     } else if (success) {
-      if (success.data) {
+      if (success.data.length) {
         // let x = { ...success.data }
         //   let { data, ...meta } = x;
+          let x = success.data.map(i => {
+            let t = i.check_in_time ? i.check_in_time.substring(0,5) : ""
+            i.check_in_time = t
+            // let d = i.check_in
+            // i.checked_in_at = t + " " + d
+            return i
+          })
           setData(success.data)
           setMeta({})
       }else{

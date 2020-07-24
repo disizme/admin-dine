@@ -112,7 +112,7 @@ class Register extends Component {
                     <BrandLogo />
                     <Form onSubmit={(e) => this.onSubmit(e)}>
                       <div className="text-center">
-                        <h1>Register</h1>
+                        <h4>Register</h4>
                         <p className="text-muted">Create your account</p>
                       </div>
                       <FormGroup className="mb-3">

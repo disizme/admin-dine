@@ -49,7 +49,7 @@ class ProfileSettings extends Component {
         let {...data} = editable
         let pathImage = editable.photo ? { photo: [editable.photo] } : {photo: []}
         data.photo = editable.photo ? [editable.photo] : []
-        data.slug = Config.qr_url+ "/" + editable.slug + "/menu"
+        data.slug = editable.slug ? Config.qr_url+ "/" + editable.slug + "/menu" :""
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
     }else{
       store.dispatch(getLoggedInUser())
@@ -280,7 +280,7 @@ class ProfileSettings extends Component {
                 <CardBody className="p-4">
                   <div className="text-center">
                   {!this.state.qrshow ? <Button className="brand-btn" onClick={() => {this.generateQR()}}>
-                    Generate Instructions
+                    Generate QR Codes
                   </Button>
                   : <>
                   <div className="mx-auto">

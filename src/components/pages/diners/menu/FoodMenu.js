@@ -35,9 +35,16 @@ function FoodMenu(props) {
     }, [])
 
     useEffect(() => {
+        const {success} = props.userProfile
+        if(success){
+            document.title = success.data.name + ' | Menu and Prices'
+        }
+    }, [props.userProfile])
+
+    useEffect(() => {
         const {success} = props.fetchCategory
         if(success){
-            if(success.data && success.data){
+            if(success.data && success.data.results && success.data.results.length){
                 setCategory(success.data.results[0].id)
                 setAllCategories(success.data.results)
             }
@@ -47,7 +54,7 @@ function FoodMenu(props) {
     useEffect(() => {
         const {success} = props.fetchFoodMenu
         if(success){
-            if(success.data && success.data.results){
+            if(success.data && success.data.results && success.data.results.length){
                 let foodie = success.data.results
                 // let foodie = success.data.filter(i => i.category_id === showCategory)
                 if(props.fetchCategory.success){
@@ -132,7 +139,7 @@ function FoodMenu(props) {
                     <div>
                     <FaMapMarkerAlt className="mr-1" />
                     {props.userProfile.success && 
-                    `${props.userProfile.success.data.postal} ${props.userProfile.success.data.city} ${props.userProfile.success.data.address}`}
+                    `${props.userProfile.success.data.address} ${props.userProfile.success.data.city} ${props.userProfile.success.data.postal}`}
                     </div>
                     </CardBody>
                 </Card>

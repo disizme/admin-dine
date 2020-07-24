@@ -42,7 +42,7 @@ class FoodItem extends Component{
                 <div className="mx-2"  
                     // onClick={() => this.handleClick()}
                      >
-                <div className="food-img">
+                {image ? <div className="food-img">
                     <img data-src={image}
                      src={placeholdImg} 
                      onError={(e) => {
@@ -50,10 +50,11 @@ class FoodItem extends Component{
                         e.target.src = placeholdImg}}
                      className="lozad" alt="item"/>
                 </div>
+                : <div className="mb-1"></div>}
                 <div className="food-heading mr-auto">
                     <h5><b>{name}</b></h5>
-                    <div><small className="text-muted">{description}</small>
-                    </div>
+                   {description ? <div><small className="text-muted">{description}</small>
+                    </div> : <br/>}
                     <div className="food-price">
                     <small>AUD$ {price}</small>
                     </div>

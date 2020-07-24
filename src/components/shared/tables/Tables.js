@@ -705,17 +705,19 @@ function Tables(props) {
                           else if (p.type === "image") {
                             // eslint-disable-next-line
                             let value = getValue(o, p.name)
+                            let thisImage = o[p.name]
+                            
                             return <td key={i+p.name} >
                               {/* <img data-src={value} className={"lozad "+p.class} onClick={() => {
                                         toggleViewModal(i, p.name) 
                                       }}  onError={(e) => {
                                         e.target.onerror = null 
                                         e.target.src = fallbackImg}} /> */}
-                                <a href="/#"  style={{ textDecoration: "underline", color: "#3366BB"}}
+                                {thisImage ? <a href="/#"  style={{ textDecoration: "underline", color: "#3366BB"}}
                                   onClick={(e) => {
                                         e.preventDefault()
                                         toggleViewModal(i, p.name) 
-                                      }}>Open Image</a>
+                                      }}>Open Image</a> : ""}
                             </td>
                           } else if (p.type === "status") {
                             let value = getValue(o, p.name)

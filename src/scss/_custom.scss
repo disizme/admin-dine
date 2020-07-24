@@ -519,3 +519,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.flex-item{
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}

@@ -10,7 +10,7 @@ export const errorHandler = (error, org) => {
             data: "Network Error. Please check your internet connection."
         }
     } else {
-        if (error.response.data.message || error.response.data.msg || error.response.data.detail) {
+        if (error.response.data) {
             let msg = msgHandler(error.response)
             return {
                 type: "error",

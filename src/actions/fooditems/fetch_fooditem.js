@@ -48,7 +48,7 @@ export function fetchFooditems(attribute) {
     axios(config).then(res => {
         dispatch(_processing(false));
         let ims = res.data.map(i => {
-          i["image"] = Config.urlbase+i.image
+          i["image"] = i.image ? Config.urlbase+i.image : null
           return i
         })
         res["data"] = ims
