@@ -43,8 +43,11 @@ export function postFoodCategory(data) {
         //     message: {variant: `error`, message: response.data, title: ``}
         //   }))
         let response = errorHandler(error)
+        if(response.data && response.data.includes("Something")){
+          response.data = "Set Up Your Restaurant Profile first!"
+        }
         store.dispatch(addSuccessMessage({
-          message: {variant: `error`, message: "Set Up Your Restaurant Profile first!", title: ``}
+          message: {variant: `error`, message: response.data, title: ``}
         }))
           dispatch(_error({response:{status:500,data:response.data}}));
         dispatch(_processing(false));
