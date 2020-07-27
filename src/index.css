@@ -259,4 +259,8 @@ a.table-button > span {
   margin-right: 5px;
 }
 
+.check-error{
+  color: #FF3333;
+}
+
 /** filter bar css ends **/

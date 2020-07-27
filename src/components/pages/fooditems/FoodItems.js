@@ -334,13 +334,14 @@ const localFilter = {
   "search": false,
   "multiple": true,
   "options": [
-    {id: "title", name: "Title"}
+    {id: "name", name: "Title"},
+    {id: "category_name", name: "Category"},
   ]
 }
 // const fetchList = ["all","home", "rashifal", "home-down", "paramarsha"]
 
-function getFiltered(data, val){
-    return data.filter(i => i.name.toLowerCase().includes(val))
+function getFiltered(data, val, key){
+    return data.filter(i => i[key].toLowerCase().includes(val))
 }
 
 function FoodItems(props) {
@@ -352,7 +353,7 @@ function FoodItems(props) {
   const [filters, setFilters] = useState([])
   // const [fetchList, setFetchList] = useState({"type": "dropdown", "value": ["all"]})
   const [fetchList, setFetchList] = useState(localFilter)
-  const [fetchType, setFetchType] = useState("title")
+  const [fetchType, setFetchType] = useState("name")
 
   function onChangeFilter(e, name) {
     let { value } = e.target
@@ -364,12 +365,17 @@ function FoodItems(props) {
     setFilters(_filters)
   }
 
-  function fetch(e) {
+  function fetch(_attributes) {
+    setAttributes(_attributes)
+    store.dispatch(fetchFooditems(_attributes))
+}
+
+  function sortFetch(e, key) {
     if(e){
-      let filtered = getFiltered(props.fetchFoodItems.success.data, e)
+      let filtered = getFiltered(props.fetchFoodItems.success.data.results, e, key)
       setData(filtered)
     }else {
-      setData(props.fetchFoodItems.success.data)
+      setData(props.fetchFoodItems.success.data.results)
     }
   }
 
@@ -377,7 +383,7 @@ function FoodItems(props) {
     if(key==="value"){
       setFetchList({...fetchList, "value": val, "search": false })
     }else if(key==="search"){
-      fetch(fetchList.value)
+      sortFetch(fetchList.value, fetchType)
       setFetchList({...fetchList, "search": true })
     }else if(key==="dropdown"){
       setFetchType(val)
@@ -410,7 +416,7 @@ function FoodItems(props) {
     let reorder = update.map(i => i.id)
     let reorderData = new FormData()
     reorderData.append(`order`,reorder)
-    store.dispatch(reorderFooditems(reorderData))
+    store.dispatch(reorderFooditems(reorderData, props.fetchFoodItems.success))
     // setData(update)
     // setMeta({})
   }
@@ -430,9 +436,10 @@ function FoodItems(props) {
     if (error) {
     } else if (success) {
       if (success.data) {
+        let { results, ...meta } = success.data;
         // let x = { ...success.data }
         // let { data } = x;
-        setData(success.data)
+        setData(results)
         // setData(datajson)
         setMeta(meta)
       }else{
@@ -466,7 +473,7 @@ function FoodItems(props) {
           hideNew={!creator}
           attributes={attributes}
           filters={filters}
-          fetch={(e) => {}}
+          fetch={(e) => fetch(e)}
           fetchList = {fetchList}
           currentFetch = {fetchType}
           updateFetch = {(e,i) => updateFetch(e,i)}

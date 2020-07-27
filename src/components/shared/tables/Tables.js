@@ -28,7 +28,7 @@ function Tables(props) {
   const { observe } = lozad();
 // eslint-disable-next-line
   let { data, message, hideNew, draggable, title, rows, meta, attributes,fetchList, showGridOption, updateFetch,currentFetch, fetch, loading, filters, onChangeFilter, setFilters, onNew, onEdit, onDelete, onView, onLink, onSend, onPrint, contentDownload, downloadData, downloadError, setDownloadData, getDownload, grid, toggleGrid, deleteTitle, customAction } = props
-  let { to, from, total } = meta
+  let { to, from, total, count } = meta
   let [downloadOpen, setDownloadOpen] = useState(0)
   let [filterOpen, setFilterOpen] = useState(0)
   let [limitOpen, setLimitOpen] = useState(0)
@@ -277,7 +277,7 @@ function Tables(props) {
             </CardHeader>
             }
             <CardBody style={!title ? { padding: "0" } : {}}>
-               <div className="filter-bar mb-2">
+               <div className="row filter-bar mb-2 mx-0">
                 {showGridOption && <div className="btn-group mx-2 mb-1">
                   <button className={`btn btn-default ${!grid ? 'brand-btn' : 'brand-outline-btn'}`} onClick={() =>toggleGrid(false)}>
                     <i className="fa fa-list" />
@@ -299,9 +299,9 @@ function Tables(props) {
                     }
                   </Input>
                 </div>
-                : <div className="d-inline-flex">
+                : <div className="d-inline-flex mb-2">
                   {fetchList.multiple && <Input type="select" name="type" placeholder="Select Type" 
-                    value={currentFetch} className="form-control w-50 mr-2"
+                    value={currentFetch} className="form-control w-50 px-1 mr-2"
                     onChange={(e) => updateFetch("dropdown",e.target.value, )}>
                     {
                       fetchList.options.map((x, y) => {
@@ -313,6 +313,7 @@ function Tables(props) {
                   </Input>}
                   <Input type="text" name="search" placeholder="Search" value={fetchList.value} 
                     autoComplete="off"
+                    className="w-50"
                     onChange={(e) => updateFetch("value",e.target.value)}
                     onKeyPress={e => {
                       if(e.key === "Enter"){ updateFetch("search") }
@@ -474,27 +475,27 @@ function Tables(props) {
                 </div>}
 
                 {/********** Pagination starts *********/}
-                {meta.hasOwnProperty("total") && 
-                <div className="paginations" style={{ marginBottom: "5px" }}>
-                  {(to - from + 1) <= total &&
+                {meta.hasOwnProperty("count") && 
+                <div className="paginations ml-auto" style={{ marginBottom: "5px" }}>
+                  {(to - from + 1) <= count &&
                     <div className="dataTables_info" style={{ display: "flex", paddingLeft: "18px" }}>
                       <Dropdown isOpen={!!limitOpen}
-                        toggle={() => {
-                          setLimitOpen(!limitOpen)
-                        }}
+                        // toggle={() => {
+                        //   setLimitOpen(!limitOpen)
+                        // }}
                       >
                         <DropdownToggle
                           tag="span"
-                          onClick={() => {
-                            setLimitOpen(!limitOpen)
-                          }}
+                          // onClick={() => {
+                          //   setLimitOpen(!limitOpen)
+                          // }}
                           data-toggle="dropdown"
                           aria-expanded={limitOpen}
-                          style={{ cursor: "pointer" }}
+                          // style={{ cursor: "pointer" }}
                         >
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{from}-{to}&nbsp;
                       </DropdownToggle>
-                        <DropdownMenu
+                        {/* <DropdownMenu
                           style={{ maxWidth: "fit-content", minWidth: "fit-content", left: "-18px", cursor: "pointer" }}>
                           <div className="dropdown-item"
                             style={{ width: "fit-content", marginRight: "0px" }}
@@ -520,10 +521,10 @@ function Tables(props) {
                               limitChange("50")
                             }}>50
                         </div>
-                        </DropdownMenu>
+                        </DropdownMenu> */}
                       </Dropdown>
                       <span>
-                        of {total}
+                        of {count}
                       </span>
                     </div>
                   }
@@ -643,7 +644,7 @@ function Tables(props) {
                         rows.map(p => {
                           if(p.type === "index"){
                             return <td key={i+"-index"}>
-                              {i+1}
+                              {from ? from+i: i+1}
                             </td>
                           } else if (p.type === "action") {
                             return <td style={p.align && { textAlign: p.align }} key={i+"-action"}>

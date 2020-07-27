@@ -59,39 +59,15 @@ const rows = [
   // }
 ]
 
-// const all_filters = [
-//   {
-//     label: 'From Date',
-//     key: 'created_at',
-//     value: "",
-//     default: false,
-//     type: "date"
-//   },
-//   {
-//     label: "Type",
-//     key: "type",
-//     value: "",
-//     default: false,
-//     type: "dropdown",
-//     options: [
-//           {id: "daily", name: "Daily"},
-//           {id: "weekly", name: "Weekly"},
-//           { id:"monthly", name: "Monthly"},
-//           { id:"yearly", name: "Yearly" }
-//     ]
-//   },
-//   {
-//     label: "Publish",
-//     key: "publish",
-//     value: "",
-//     default: false,
-//     type: "dropdown",
-//     options:[
-//       { id:"Y", name: "Yes" },
-//       { id:"N", name: "No" }
-//     ]
-//   }
-// ]
+const all_filters = [
+  {
+    label: 'Date',
+    key: 'date',
+    value: "",
+    default: false,
+    type: "date"
+  }
+]
 
 // const fetchList = ["all","home", "rashifal", "home-down", "paramarsha"]
 
@@ -101,24 +77,24 @@ function Customers(props) {
   const [data, setData] = useState([])
   const [meta, setMeta] = useState({})
   // eslint-disable-next-line
-  const [filters, setFilters] = useState([])
+  const [filters, setFilters] = useState([...all_filters])
   // const [fetchList, setFetchList] = useState({"type": "dropdown", "value": ["all"]})
 
 
-  // function onChangeFilter(e, name) {
-  //   let { value } = e.target
-  //   let _filters = [...filters]
-  //   let index = _filters.findIndex(x => x.key === name)
-  //   if (index > -1) {
-  //     _filters[index]["value"] = value
-  //   }
-  //   setFilters(_filters)
-  // }
+  function onChangeFilter(e, name) {
+    let { value } = e.target
+    let _filters = [...filters]
+    let index = _filters.findIndex(x => x.key === name)
+    if (index > -1) {
+      _filters[index]["value"] = value
+    }
+    setFilters(_filters)
+  }
 
-  // function fetch(_attributes) {
-  //     setAttributes(_attributes)
-  //     store.dispatch(fetchRashifal(_attributes))
-  // }
+  function fetch(_attributes) {
+    setAttributes(_attributes)
+    store.dispatch(fetchCustomers(_attributes))
+  }
 
   // function onEdit(id) {
   //   props.history.push(`/customers/${id}/edit`)
@@ -151,18 +127,19 @@ function Customers(props) {
       //   }
       // }
     } else if (success) {
-      if (success.data.length) {
+      if (success.data) {
+        let { results, ...meta } = success.data;
         // let x = { ...success.data }
         //   let { data, ...meta } = x;
-          let x = success.data.map(i => {
+          let x = results.map(i => {
             let t = i.check_in_time ? i.check_in_time.substring(0,5) : ""
             i.check_in_time = t
             // let d = i.check_in
             // i.checked_in_at = t + " " + d
             return i
           })
-          setData(success.data)
-          setMeta({})
+          setData(x)
+          setMeta(meta)
       }else{
         setData([])
         setMeta({})
@@ -201,8 +178,8 @@ function Customers(props) {
           // onNew={() => {
           //   props.history.push("/customers/new")
           // }}
-          // onChangeFilter={onChangeFilter.bind(this)}
-          // setFilters={setFilters.bind(this)}
+          onChangeFilter={onChangeFilter.bind(this)}
+          setFilters={setFilters.bind(this)}
         />
       :<Card>
         <CardBody className="text-center"><i className="fa fa-spin fa-spinner" /></CardBody>

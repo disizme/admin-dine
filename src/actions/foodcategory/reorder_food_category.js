@@ -4,6 +4,7 @@ import {Config} from "../../Config";
 import {errorHandler} from "../../components/shared/helpers/ErrorHandler";
 import store from "../../Store";
 import {addSuccessMessage} from "../successMessage/success_message";
+import fetchFoodCategory from './fetch_food_category';
 
 function _success(success) {
   return {type: 'REORDER_FOOD_CATEGORY_SUCCESS', success}
@@ -36,9 +37,9 @@ export function reorderFoodCategory(data, original) {
     axios(config).then(res => {
         dispatch(_processing(false));
         dispatch(_success(res));
-        // console.log("res", res.data, original.data)
-        original.data.results = res.data
-        dispatch(_resetorder(original));
+        store.dispatch(fetchFoodCategory())
+        // original.data.results = res.data
+        // dispatch(_resetorder(original));
       }).catch(error => {
         // let response = errorHandler(error)
         //   store.dispatch(addSuccessMessage({

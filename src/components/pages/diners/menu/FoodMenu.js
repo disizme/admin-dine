@@ -44,9 +44,9 @@ function FoodMenu(props) {
     useEffect(() => {
         const {success} = props.fetchCategory
         if(success){
-            if(success.data && success.data.results && success.data.results.length){
-                setCategory(success.data.results[0].id)
-                setAllCategories(success.data.results)
+            if(success.data && success.data.length){
+                setCategory(success.data[0].id)
+                setAllCategories(success.data)
             }
         }
     }, [props.fetchCategory])
@@ -54,11 +54,11 @@ function FoodMenu(props) {
     useEffect(() => {
         const {success} = props.fetchFoodMenu
         if(success){
-            if(success.data && success.data.results && success.data.results.length){
-                let foodie = success.data.results
+            if(success.data && success.data.length){
+                let foodie = success.data
                 // let foodie = success.data.filter(i => i.category_id === showCategory)
                 if(props.fetchCategory.success){
-                    let allItems = props.fetchCategory.success.data.results.map(i => {
+                    let allItems = props.fetchCategory.success.data.map(i => {
                         let eachCat = foodie.filter(j => j.category_name === i.name)
                         return { name: i.name, items: eachCat }
                     })

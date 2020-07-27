@@ -25,7 +25,9 @@ class CheckIn extends Component{
         // address:"",
         phone_number: "",
         postcode: ""
-      }
+      },
+      checkError: false,
+      checkedin: false
     }
 
 
@@ -47,7 +49,11 @@ class CheckIn extends Component{
 
     onSubmit(e){
         e.preventDefault()
-        store.dispatch(customerCheckin(this.state.data, this.props.match.params.slug))
+        if(this.state.checkedin){
+          store.dispatch(customerCheckin(this.state.data, this.props.match.params.slug))
+        }else{
+          this.setState({ checkError: true })
+        }
     }
 
     componentDidUpdate(prevProps){
@@ -67,7 +73,7 @@ class CheckIn extends Component{
     }
 
     render(){
-      const { data } = this.state
+      const { data, checkedin } = this.state
       let allInputs = [
         {
           name: "name",
@@ -128,7 +134,19 @@ class CheckIn extends Component{
                     })
                   }
                 <div className="text-center mt-3">
-                  <p className="mb-1"><small>I agree to the terms and conditions by checking in to this application.</small></p>
+                  <div className="mb-1">
+                    {/* <label> */}
+                    <input type="checkbox" className="mr-1" style={{verticalAlign: "middle"}}
+                     value={checkedin} onChange={() => 
+                        this.setState({
+                          checkedin: !checkedin,
+                          checkError: false
+                        })}
+                    /> <small className={this.state.checkError ? "check-error" : ""}>
+                    I agree to the terms and conditions by checking in to this application.
+                    </small>
+                    {/* </label> */}
+                    </div>
                   <p xs="6">
                       <Button className="px-4 brand-component" type='submit'>
                       <FaUtensils className="mr-1" />

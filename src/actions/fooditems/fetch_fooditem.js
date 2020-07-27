@@ -18,6 +18,9 @@ function _processing(processing) {
 }
 
 export function fetchFooditems(attribute) {
+  let params = {
+      page: (attribute && attribute.page) || 1
+    }
   // let params = {
   //     limit: (attribute && attribute.limit) || 20,
   //     page: (attribute && attribute.page) || 1,
@@ -40,18 +43,44 @@ export function fetchFooditems(attribute) {
       url: Config.BaseUrl + `/menu`,
       method: "get",
       dataType: 'json',
-      // params,
+      params,
       headers: {
         'Authorization': 'Bearer ' + loginToken()
       }
     };
     axios(config).then(res => {
         dispatch(_processing(false));
-        let ims = res.data.map(i => {
+        let ims = res.data.results.map(i => {
           i["image"] = i.image ? Config.urlbase+i.image : null
           return i
         })
-        res["data"] = ims
+        res.data["results"] = ims
+
+        if(res.data.count <=10){
+          res.data["current_page"] = 1
+          res.data["last_page"] = 1
+          res.data["from"] = 1
+          res.data["to"] = res.data.count
+        }else{
+          if(res.data.previous === null){
+            res.data["current_page"] = 1
+            res.data["last_page"] = Math.ceil(res.data.count/10)
+            res.data["from"] = 1
+            res.data["to"] = 10
+          }else if(res.data.next === null){
+            res.data["current_page"] = Math.ceil(res.data.count/10)
+            res.data["last_page"] = Math.ceil(res.data.count/10)
+            res.data["from"] = Math.floor(res.data.count/10) * 10 + 1
+            res.data["to"] = res.data.count
+          }else{
+            let nextPage = res.data.next.split("page=")[1]
+            res.data["current_page"] = parseInt(nextPage) - 1
+            res.data["last_page"] = Math.ceil(res.data.count/10)
+            res.data["from"] = (parseInt(nextPage) - 2) * 10 + 1
+            res.data["to"] = (parseInt(nextPage) - 2) * 10 + 10
+          }
+        }
+
         dispatch(_success(res));
 
       }).catch(error => {
