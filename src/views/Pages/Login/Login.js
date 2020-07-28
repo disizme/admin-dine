@@ -62,6 +62,7 @@ class Login extends Component {
           // if(checkAdmin(data.user.roles)){
             localStorage.setItem('Bearer', data.access);
             localStorage.setItem('rt', data.refresh);
+            localStorage.setItem("admin", data.is_admin ? 1 : 0)
             // localStorage.setItem('user', data.user.email);
             // localStorage.removeItem('redirect')
             store.dispatch(getLoggedInUser());

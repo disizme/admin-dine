@@ -15,6 +15,7 @@ import {
 } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
+import adminnavigation from '../../_nav_admin';
 // routes config
 import routes from '../../routes';
 import BounceLoader from "../../components/shared/loaders/BounceLoader";
@@ -54,13 +55,12 @@ class DefaultLayout extends Component {
     navConfig: navigation
   }
 
-  // componentDidMount(){
-  //   const { permissions } = this.props.getLoggedInUser
-  //   if(permissions){
-  //     let navs = filterNav(permissions)
-  //     this.setState({navConfig : navs})
-  //   }
-  // }
+  componentDidMount(){
+    let is_admin = localStorage.getItem("admin")
+    this.setState({
+      navConfig: is_admin === "0" ? navigation : adminnavigation
+    })
+  }
 
   // componentDidUpdate(prevProps) {
   //   if (this.props.getLoggedInUser !== prevProps.getLoggedInUser) {

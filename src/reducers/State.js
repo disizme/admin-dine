@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import fetchAllUsers from './superadmin/fetch-users';
+
 import loading from './activateLoading/activate-loading';
 import successMessage from './successMessage/success-message';
 
@@ -43,7 +45,7 @@ import reorderFoodCategory from './food-category/reorder-food-category';
 import reorderFoodItems from './fooditems/reorder-fooditems';
 
 const allReducers = combineReducers({
-  loading, successMessage,
+  loading, successMessage, fetchAllUsers,
   userProfile, fetchCategory, fetchFoodMenu,  customerCheckin, customerOrder,
   fetchHourCount, fetchDayCount, fetchMonthCount, fetchPercentile,
   postUserProfile, editUserProfile, postUserSettings, editUserSettings,

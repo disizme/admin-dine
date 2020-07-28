@@ -22,7 +22,9 @@ function _processing(processing) {
 }
 
 export function customerCheckin(data,slug) {
-  // console.log( "slug",slug)
+  let params= {
+    offset:  new Date().getTimezoneOffset()
+  }
   return dispatch => {
     dispatch(_processing(true));
     let config = {
@@ -30,6 +32,7 @@ export function customerCheckin(data,slug) {
       // method: "get"
       // url: Config.BaseUrl + "/checkin/slug",
       method: "post",
+      params,
       dataType: 'json',
       data: data,
     //   headers: {

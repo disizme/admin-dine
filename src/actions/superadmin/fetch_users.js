@@ -6,18 +6,18 @@ import store from "../../Store";
 import {addSuccessMessage} from "../successMessage/success_message";
 
 function _success(success) {
-  return {type: 'FETCH_CUSTOMERS_SUCCESS', success}
+  return {type: 'FETCH_ALL_USERS_SUCCESS', success}
 }
 
 function _error(error) {
-  return {type: 'FETCH_CUSTOMERS_ERROR', error}
+  return {type: 'FETCH_ALL_USERS_ERROR', error}
 }
 
 function _processing(processing) {
-    return { type: 'FETCH_CUSTOMERS_PROCESSING', processing }
+    return { type: 'FETCH_ALL_USERS_PROCESSING', processing }
 }
 
-export function fetchCustomers(attribute) {
+export function fetchAllUsers(attribute) {
   let params = {
       // offset: new Date().getTimezoneOffset(),
       page: (attribute && attribute.page) || 1,
@@ -39,9 +39,9 @@ export function fetchCustomers(attribute) {
   return dispatch => {
     dispatch(_processing(true));
     let config = {
-      url: Config.BaseUrl + `/customers`,
+      url: Config.BaseUrl + `/profile/list`,
       method: "get",
-      dataType: 'json',
+      // dataType: 'json',
       params,
       headers: {
         'Authorization': 'Bearer ' + loginToken()
@@ -88,5 +88,5 @@ export function fetchCustomers(attribute) {
   }
 }
 
-export default fetchCustomers;
+export default fetchAllUsers;
 

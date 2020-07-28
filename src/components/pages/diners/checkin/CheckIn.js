@@ -61,6 +61,7 @@ class CheckIn extends Component{
       if (customerCheckin !== prevProps.customerCheckin) {
           let { success, error } = customerCheckin;
           if(success){
+            sessionStorage.setItem("customer", success.data.email)
             this.props.history.push(`/customer-dine/${this.slug}/menu`)
         }else if(error){
         }

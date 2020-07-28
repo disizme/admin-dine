@@ -29,7 +29,6 @@ export function userProfile(slug) {
     };
     axios(config).then(res => {
         dispatch(_processing(false));
-        console.log("tr", res)
         let ims = res.data
         ims["photo"] = Config.urlbase+ims.photo
         res["data"] = ims

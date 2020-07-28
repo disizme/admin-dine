@@ -18,9 +18,9 @@ function _processing(processing) {
 }
 
 export function fetchHourCount() {
-  let params= {
-    offset:  new Date().getTimezoneOffset()
-  }
+  // let params= {
+  //   offset:  new Date().getTimezoneOffset()
+  // }
   // let params = {
   //     limit: (attribute && attribute.limit) || 20,
   //     page: (attribute && attribute.page) || 1,
@@ -41,7 +41,7 @@ export function fetchHourCount() {
       url: Config.BaseUrl + `/hourlycount`,
       method: "get",
       dataType: 'json',
-      params,
+      // params,
       headers: {
         'Authorization': 'Bearer ' + loginToken()
       }

@@ -4,12 +4,14 @@ const FoodItemsUI = React.lazy(()=> import ('./components/pages/fooditems/FoodIt
 const FoodCategoryUI = React.lazy(() => import('./components/pages/foodcategory/CategoryUI'));
 const CustomersUI = React.lazy(() => import('./components/pages/customers/CustomersUI'));
 const Profile = React.lazy(() => import('./components/pages/profile/Profile'))
+const AllUsers = React.lazy(() => import('./components/pages/allusers/AllUsers'))
 const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const FullPageModal = React.lazy(() => import('./components/shared/messages/FullPageModal'));
 
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/userlists', exact: true, name: 'Users', component: AllUsers},
   { path: '/emenu', exact: true, name: 'E-Menu', component: FoodItemsUI},
   { path: '/emenu/food-items', exact: true, name: 'Food Items', component: FoodItemsUI},
   { path: '/emenu/food-items/new', exact: true, name: 'New Item', component: FoodItemsUI},
