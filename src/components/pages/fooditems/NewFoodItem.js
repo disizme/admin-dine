@@ -202,8 +202,8 @@ class NewFoodItem extends Component {
         //   { id:"market", name: "Dinner" },
         //   { id:"url", name: "Lunch" },
         // ]
-        option: fetchFoodCategory.success ? fetchFoodCategory.success.data.results ? 
-          fetchFoodCategory.success.data.results.map(i => {
+        option: fetchFoodCategory.success ? fetchFoodCategory.success.data ? 
+          fetchFoodCategory.success.data.map(i => {
           return {id: i.name, name: i.name}
         }) : [{id: 0, name: "No Categories Found"}] : [{id: 0, name: "No Categories Found"}]
       },

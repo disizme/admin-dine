@@ -404,7 +404,7 @@ function Tables(props) {
                         <Col xs="12">
                           <Button type="reset" size="sm" color="default" onClick={() => setFilterOpen(!filterOpen)}><i
                             className="fa fa-ban"></i> Cancel</Button>
-                          <Button type="submit" size="sm" color="primary"
+                          <Button type="submit" size="sm" className="brand-btn"
                             onClick={() => applyFilters()}
                             style={{ marginRight: "4px", float: "right" }}><i
                               className="fa fa-dot-circle-o"></i> Apply Filter</Button>

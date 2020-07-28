@@ -346,7 +346,7 @@ function getFiltered(data, val, key){
 
 function FoodItems(props) {
   const [attributes, setAttributes] = useState({sort_field :"display_order", sort_by: "asc"})
-  const [data, setData] = useState(datajson)
+  const [data, setData] = useState([])
   const [meta, setMeta] = useState({})
   const [tableRows, setTableRows] = useState(rows)
   const [creator, setCreator] = useState(true)
