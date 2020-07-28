@@ -32,11 +32,11 @@ export function fetchFoodMenu(slug) {
     // setTimeout(() => {
       axios(config).then(res => {
         dispatch(_processing(false));
-        let ims = res.data.results && res.data.results.map(i => {
+        let ims = res.data && res.data.map(i => {
           i["image"] = i.image ? Config.urlbase+i.image : null
           return i
         })
-        res.data.results = ims
+        res.data = ims
         dispatch(_success(res));
 
       }).catch(error => {
