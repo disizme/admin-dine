@@ -19,6 +19,7 @@ let dataFormat = {
   address: "",
   postal: "",
   city: "",
+  // color: "#ff6737"
   // slug: ""
 }
 
@@ -228,7 +229,7 @@ class ProfileSettings extends Component {
         name: "postal",
         placeholder: "Postal",
         type: "text",
-        pattern: "[0-9{4}",
+        pattern: "[0-9]{4}",
         required: false,
         value: data.postal,
       },
@@ -239,6 +240,14 @@ class ProfileSettings extends Component {
         required: false,
         value: data.city,
       },
+      // {
+      //   name: "color",
+      //   placeholder: "Brand Color",
+      //   type: "color",
+      //   required: false,
+      //   value: data.color,
+      //   wide: "50px"
+      // },
       {
         name: "slug",
         placeholder: "Slug for your menu",

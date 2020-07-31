@@ -72,7 +72,7 @@ export function InputField(props) {
   </Row>
 
   }else{
-    const {icon, name,dropdown_name, placeholder, pattern, type, sub_type, value,dropdown_value, error, option, required, acceptable, multiple, disabled} = props.input
+    const {icon, name,dropdown_name, placeholder, pattern, wide, type, sub_type, value,dropdown_value, error, option, required, acceptable, multiple, disabled} = props.input
   
 
   function onChange(e) {
@@ -283,6 +283,7 @@ export function InputField(props) {
               onChange={e => {
                 onChange(e)
               }}
+              style={{maxWidth: wide ? wide : ""}}
               pattern={pattern ? pattern : null}
               rows={4}
               disabled={disabled ? true : false}

@@ -49,7 +49,7 @@ class DefaultHeader extends Component {
             <DropdownToggle nav>
               {/* <img src={logo} className="img-avatar" alt="User" /> */}
               <div className="img-avatar" style={{fontSize: "25px"}}>
-                <i className={`fa fa-user-${localStorage.getItem("admin") === "0" ? "circle" : "shield"}`} />
+                <i className={`fa fa-user-${localStorage.getItem("admin") === "1" ? "shield" : "circle"}`} />
               </div>
             </DropdownToggle>
             <DropdownMenu right>

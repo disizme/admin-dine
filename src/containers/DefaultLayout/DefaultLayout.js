@@ -58,7 +58,7 @@ class DefaultLayout extends Component {
   componentDidMount(){
     let is_admin = localStorage.getItem("admin")
     this.setState({
-      navConfig: is_admin === "0" ? navigation : adminnavigation
+      navConfig: is_admin === "1" ? adminnavigation : navigation
     })
   }
 
