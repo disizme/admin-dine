@@ -12,7 +12,7 @@ export function verifyUserAccount(token, history){
       axios.post(Config.BaseUrl+`/user/verify-email/`,data)
       .then(res => {
         store.dispatch(addSuccessMessage({
-          message: {variant: `success`, message: res.data, title: ``}
+          message: {variant: `success`, message: "Your account is verified. Please Login to continue.", title: ``}
         }))
         history.push('/login')
       })

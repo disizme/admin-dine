@@ -64,7 +64,7 @@ class Register extends Component {
         if (success.data) {
           let data = success.data
           store.dispatch(addSuccessMessage({
-                message: { variant: `success`, message: "Please Login to continue!", title: `` }
+                message: { variant: `success`, message: "Please check your mail before you begin.", title: `` }
               }))
             this.props.history.push("/login")
             
