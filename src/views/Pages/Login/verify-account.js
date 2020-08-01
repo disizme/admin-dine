@@ -33,12 +33,12 @@ class verifyAccount extends Component {
             <div className="app flex-row align-items-center">
                 <Container>
                     <Row className="justify-content-center">
-                        <Col xs='8' md='6' lg='5' sm='7' style={{ minWidth: '350px' }}>
-                            <Card >
+                        <Col xs='8' md='8' lg='8' sm='8' style={{ minWidth: '350px' }}>
+                            <Card>
                                 <CardBody >
                                     <BrandLogo />
-                                    <h4 className="np-color text-center" >
-                                        Click the button below to verify your Dinemate account.</h4>
+                                    <h5 className="my-2 text-center" >
+                                        Click the button below to verify your Dinemate account.</h5>
                                     <div className='p-2'>
                                         <div className='text-center'>
                                             <Button className="btn brand-btn" 

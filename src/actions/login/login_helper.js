@@ -4,9 +4,12 @@ import { errorHandler } from '../../components/shared/helpers/ErrorHandler';
 import { addSuccessMessage } from '../successMessage/success_message';
 import store from "../../Store";
 
-export function verifyUserAccount(data, history){
+export function verifyUserAccount(token, history){
+  let data = { 
+    key: token
+  }
   return dispatch => {
-      axios.get(Config.BaseUrl+`/user-verify/${data}`)
+      axios.post(Config.BaseUrl+`/user/verify-email/`,data)
       .then(res => {
         store.dispatch(addSuccessMessage({
           message: {variant: `success`, message: res.data, title: ``}
