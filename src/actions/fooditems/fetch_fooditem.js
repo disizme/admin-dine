@@ -59,7 +59,7 @@ export function fetchFooditems(attribute) {
         if(res.data.count <=10){
           res.data["current_page"] = 1
           res.data["last_page"] = 1
-          res.data["from"] = 1
+          res.data["from"] = res.data.count === 0 ? 0 : 1
           res.data["to"] = res.data.count
         }else{
           if(res.data.previous === null){

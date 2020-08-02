@@ -2,6 +2,7 @@ import { tokenInterception } from "./AuthenticationHelper"
 
 export const errorHandler = (error, org) => {
     if (error && error.response && error.response.status === 401 && org !== "login"){
+        console.log(error.response)
         tokenInterception()
         return { data: "Refreshing Token"}
     }else if (error.toString() === "Error: Network Error" || !error.response) {
@@ -64,33 +65,35 @@ export const errorHandler = (error, org) => {
 
 
 function msgHandler(error){
-    if(error.data.message){
-        if(error.data.message.length){
-            return error.data.message
-        }else{
-            let m = Object.keys(error.data.message)
-            let errormsg = ''
-            for(let i=0;i<m.length; i++){
-                errormsg = errormsg + error.data.message[`${m[i]}`][0] + '  '
-            }
-            return errormsg
-            }
-    }else if(error.data.msg){
-       return error.data.msg
-    }else if(error.data.detail){
-        return error.data.detail
-    }else{
-        let m = Object.keys(error.data)
-        if(m.length<5){
-        let errormsg = ''
-        for(let i=0;i<m.length; i++){
-            errormsg = errormsg + error.data[`${m[i]}`][0] + '  '
+    if(error.data.detail){
+        let err = error.data.detail
+        let returnmsg = ""
+        if(Array.isArray(err)){
+            let errmsg = err.map(i => {
+                let keys = Object.keys(i)
+                let msg= ""
+                for(let  j =0; j<keys.length; j++){
+                    if(keys[j] === "is_verified"){
+                        msg = "Please check your email to verify your account."
+                    }else if(Array.isArray(i[keys[j]])){
+                        msg = msg + " " + i[keys[j]][0]
+                    }else if(typeof i[keys[j]] === "object"){
+                        let innerVal = Object.values(i[keys[j]])
+                        msg = msg + " " + innerVal.join(", ")
+                    }else{
+                        msg = msg + JSON.stringify(i[keys[j]])
+                    }
+                }
+                return msg
+            })
+            returnmsg = errmsg.join(", ")
+        }else {
+            returnmsg = JSON.stringify(err)
         }
-        return errormsg
+        return returnmsg.replace(/\[|\]|\{|\}|\"|\'/g, "").replace(/\:/g," ")
     }else if(error.data && error.data.includes("html")){
         return "Something Went Wrong!"
     }else {
         return "Something Went Wrong!"
     }
-}
 }
