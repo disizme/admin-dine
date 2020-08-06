@@ -49,7 +49,7 @@ export default class QRGen extends Component {
                     document={<PrintDoc checkin={this.qrcheckurl}
                         menu={this.qrmenuurl}
                         photo={this.props.data.photo}
-                        name={this.props.data.name} />} fileName="Dinemate.pdf">
+                        name={this.props.data.name} />} fileName={`Dinemate-${this.props.slug}.pdf`}>
                         {({ blob, url, loading, error }) => (loading ? <i className="fa fa-spin fa-spinner" /> : 'Download now!')}
                 </PDFDownloadLink>
                 </Button>
