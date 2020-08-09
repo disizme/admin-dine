@@ -76,10 +76,9 @@ function GetCheckInPage(props){
         </View>
         <View style={styles.cautionStyle}>
                 <Text style={{marginBottom: "10"}}>Welcome</Text>
-            <Text>Before you check-in, we are required to collect contact information from at least 1 guest from your party.</Text>
         </View>
         <View>
-                <Text style={styles.infoStyle}>Please Scan the QR Code below</Text>
+                <Text style={styles.infoStyle}>Please check-in by scanning the QR code below.</Text>
         </View>
         <Image source={ {uri: props.image} } style={styles.qrStyle} />
         <View style={styles.instructStyle}>
