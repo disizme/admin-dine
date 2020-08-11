@@ -489,6 +489,9 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
+        <Col lg="6" md="6">
+            <PercentChart option={mainChartOpts} />
+          </Col>
           <Col lg="6" md="6">
             <HourChart option={mainChartOpts} />
           </Col>
@@ -499,9 +502,6 @@ class Dashboard extends Component {
         <Row>
           <Col lg="6" md="6">
             <MonthChart option={mainChartOpts} />
-          </Col>
-          <Col lg="6" md="6">
-            <PercentChart option={mainChartOpts} />
           </Col>
         </Row>
       </div>

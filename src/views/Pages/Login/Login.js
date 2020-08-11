@@ -20,6 +20,7 @@ import store from "../../../Store"
 import { connect } from "react-redux";
 import BrandLogo from '../../../components/shared/reseller_logo/BrandLogo';
 import { getLoggedInUser } from '../../../actions/login/get_logged_in_user';
+import fetchMyPlan from '../../../actions/subscription/fetch_my_plan';
 
 let dataFormat= {username: "", password: ""}
 
@@ -66,6 +67,7 @@ class Login extends Component {
             // localStorage.setItem('user', data.user.email);
             // localStorage.removeItem('redirect')
             store.dispatch(getLoggedInUser());
+            store.dispatch(fetchMyPlan())
             this.props.history.push("/dashboard");
           // }else{
           //   store.dispatch(addSuccessMessage({

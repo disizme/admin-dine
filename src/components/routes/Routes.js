@@ -7,19 +7,9 @@ import store from "../../Store"
 import ShowSnackbar from "../shared/messages/Snackbar";
 import BounceLoader from "../shared/loaders/BounceLoader";
 import FullPageLoader from "../shared/loaders/FullPageLoader";
-// import CheckIn from '../pages/diners/checkin/CheckIn';
-// import FoodMenu from '../pages/diners/menu/FoodMenu';
+import fetchMyPlan from '../../actions/subscription/fetch_my_plan';
 
 const loading = () => <BounceLoader/>;
-// const CustomerHome = () => {
-//   return <div className="App check-in d-flex flex-row align-items-center">
-//     <button className="text-center mx-auto my-auto btn brand-component p-2" 
-//       style={{color: "white"}}
-//       onClick={() => window.location.href="https://dinemate.com.au"}>
-//       Please Use the QR code
-//     </button>
-//   </div>
-// }
 
 const Login = React.lazy(() => import('./../../views/Pages/Login/Login'));
 const VerifyAccount = React.lazy(() => import('./../../views/Pages/Login/verify-account'));
@@ -38,6 +28,7 @@ class Routes extends Component {
   componentDidMount() {
     if (loggedIn()) {
       store.dispatch(getLoggedInUser());
+      store.dispatch(fetchMyPlan())
       if (!loggedIn()) {
         this.setState({
           processing: false
@@ -58,6 +49,7 @@ class Routes extends Component {
         // store.dispatch(getRole(success.data.payload.id));
         user.name = success.data.full_name;
         this.setState({user});
+        
       } else {
         //
       }
@@ -73,10 +65,6 @@ class Routes extends Component {
               return (
                 <React.Suspense fallback={loading()}>
                   <Switch>
-                  {/* <Route exact path="/customer-dine" render={(props) => <CustomerHome />} />
-                    <Route exact path="/customer-dine/:slug/checkin" name="Check In" render={(props) => <CheckIn {...props} />} />
-                    <Route exact path="/customer-dine/:slug/menu" name="Food Menu" render={(props) => <FoodMenu {...props} />} />
-                   */}
                     <Route path="/" name="Home" render={(props) => <DefaultLayout {...this.props}/>}/>
                     </Switch>
                 </React.Suspense>
@@ -91,9 +79,6 @@ class Routes extends Component {
                     <Route exact path="/register" name="Register Page" render={(props) => <Register {...props}/>}/>
                     <Route exact path="/404" name="Page 404" render={(props) => <Page404 {...props}/>}/>
                     <Route exact path="/500" name="Page 500" render={(props) => <Page500 {...props}/>}/>
-                    {/* <Route exact path="/customer-dine" render={(props) => <CustomerHome />} />
-                    <Route exact path="/customer-dine/:slug/checkin" name="Check In" render={(props) => <CheckIn {...props} />} />
-                    <Route exact path="/customer-dine/:slug/menu" name="Food Menu" render={(props) => <FoodMenu {...props} />} /> */}
                     <Redirect to="/" />
                   </Switch>
                 </React.Suspense>

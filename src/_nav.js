@@ -31,6 +31,11 @@ export default {
       url: '/customers',
     },
     {
+      name: "Subscriptions",
+      icon: "icon-wallet",
+      url: '/subscriptions',
+    },
+    {
       name: "Settings",
       icon: "icon-settings",
       url: '/settings',

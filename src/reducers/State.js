@@ -44,6 +44,10 @@ import customerOrder from './diners/customer/customer-order';
 import reorderFoodCategory from './food-category/reorder-food-category';
 import reorderFoodItems from './fooditems/reorder-fooditems';
 
+import fetchPlans from './subscription/fetch-plans';
+import getSubscription from './subscription/get-subscription';
+import fetchMyPlan from './subscription/fetch-my-plan';
+
 const allReducers = combineReducers({
   loading, successMessage, fetchAllUsers,
   userProfile, fetchCategory, fetchFoodMenu,  customerCheckin, customerOrder,
@@ -54,6 +58,7 @@ const allReducers = combineReducers({
   reorderFoodCategory, reorderFoodItems,
   fetchCustomers, editCustomers, postCustomers, deleteCustomers,
   getLoginRequest, getLoggedInUser, getSignupRequest,
+  fetchPlans, getSubscription, fetchMyPlan
 });
 
 export default allReducers;

@@ -3,7 +3,7 @@ import store from "../../../Store"
 import { connect } from "react-redux";
 import { addSuccessMessage } from '../../../actions/successMessage/success_message';
 import DefaultForm from '../../shared/tables/DefaultForm';
-import { Row, Col, Card, CardBody, CardHeader, ButtonGroup, Button } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
 import QRGen from './QRGen';
 import getLoggedInUser from '../../../actions/login/get_logged_in_user';
 import postUserProfile from '../../../actions/userprofile/post_userprofile';
@@ -12,6 +12,7 @@ import editUserProfile from '../../../actions/userprofile/edit_userprofile';
 import { Config } from '../../../Config';
 import PrintDoc from './PDFGen';
 import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import fetchMyPlan from '../../../actions/subscription/fetch_my_plan';
 
 let dataFormat = {
   photo: [],
@@ -54,6 +55,9 @@ class ProfileSettings extends Component {
         this.setState({data : {...this.state.data, ...data}, imagepaths : pathImage, slugdata: editable.slug})
     }else{
       store.dispatch(getLoggedInUser())
+    }
+    if(!this.props.fetchMyPlan.success){
+        store.dispatch(fetchMyPlan())
     }
   }
 
@@ -240,14 +244,22 @@ class ProfileSettings extends Component {
         required: false,
         value: data.city,
       },
-      // {
-      //   name: "color",
-      //   placeholder: "Brand Color",
-      //   type: "color",
-      //   required: false,
-      //   value: data.color,
-      //   wide: "50px"
-      // },
+      {
+        name: "color",
+        placeholder: "Brand Color",
+        type: "color",
+        required: false,
+        value: data.color,
+        wide: "50px"
+      },
+      {
+        name: "pixel",
+        placeholder: "FB Tracking ID (Pixel)",
+        type: "text",
+        required: false,
+        value: data.pixel,
+        customShow: (this.props.fetchMyPlan.success && this.props.fetchMyPlan.success.data && this.props.fetchMyPlan.success.data.is_tracker) ? false : true  
+      },
       {
         name: "slug",
         placeholder: "Slug for your menu",
@@ -310,9 +322,9 @@ class ProfileSettings extends Component {
 }
 
 function mapStateToProps(state) {
-  let { getLoggedInUser, postUserProfile } = state
+  let { getLoggedInUser, postUserProfile, fetchMyPlan } = state
   return {
-    getLoggedInUser, postUserProfile
+    getLoggedInUser, postUserProfile, fetchMyPlan
   }
 }
 

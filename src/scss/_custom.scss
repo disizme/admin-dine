@@ -526,3 +526,47 @@ input[type=number] {
   align-items: stretch;
   flex-direction: column;
 }
+
+
+.offer-box{
+  border: 1px solid #e7eaec;
+  border-radius: 5px;
+  padding: 1em;
+  height: 100%;
+  background: rgba(32,168,216,0.2);
+  cursor: pointer;
+}
+
+.selected-offer{
+  font-size: 25px;
+  color:  rgb(113, 224, 85);
+}
+
+.offer-box:hover{
+  box-shadow: 0 3px 10px 0 #33333355;
+}
+
+.payment-collapse {
+  overflow: hidden;
+  transition: height 0.3s ease-out;  
+}
+
+.payment-box{
+  border: 1px solid #c8ced3;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px 0 #33333355;
+}
+
+
+.StripeElement {
+  margin: 15px auto;
+  padding: 10px 12px;
+  color: #32325d;
+  background-color: #f2f2f2;
+  border: 1px solid #e7eaec;
+  border-radius: 4px;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
