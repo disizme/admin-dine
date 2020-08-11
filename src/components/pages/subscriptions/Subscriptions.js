@@ -10,48 +10,9 @@ import fetchPlans from '../../../actions/subscription/fetch_plans';
 import { addSuccessMessage } from '../../../actions/successMessage/success_message';
 import fetchMyPlan from '../../../actions/subscription/fetch_my_plan';
 import { subscriptionReset } from '../../../actions/subscription/get_subscription';
+import { Config } from '../../../Config';
 
-const stripePromise = loadStripe("pk_test_51HBlcaDLisZAJjrz6r7rznsMHgFuSNmko1gx2aFY8BQSNlmcoRnihLYV4IiNLCuBjiLGsOQWqqGNOK8XIgQqEjAF00u7JqukaV");
-
-
-let allPlans = [
-  {
-    id: "p1",
-    name: "Cuppa",
-    price: 0,
-    offers: [
-      "Digital Check-in",
-      "Dynamic e-Menu",
-      "Customer Insights",
-      "1000 Menu View/month"
-    ]
-  },
-  {
-    id: "p2",
-    name: "Brekkie",
-    price: 9.95,
-    offers: [
-      "Digital Check-in",
-      "Dynamic e-Menu",
-      "Customer Insights",
-      "Unlimited Menu View"
-    ]
-  },
-  {
-    id: "p3",
-    name: "Buffet",
-    price: 19.95,
-    offers: [
-      "Digital Check-in",
-      "Dynamic e-Menu",
-      "Customer Insights",
-      "Unlimited Menu View",
-      "Facebook Pixel Tracker"
-    ]
-  }
-]
-
-
+const stripePromise = loadStripe(Config.stripe_key);
 
 function UserSubscriptions(props){
     const paymentdetail = useRef(null);

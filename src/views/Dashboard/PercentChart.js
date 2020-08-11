@@ -74,7 +74,7 @@ function PercentChart(props){
   <CardBody>
     <Row>
       <Col sm="7">
-        <CardTitle className="mb-0">Percent Increase</CardTitle>
+        <CardTitle className="mb-0">Percent Change</CardTitle>
         {/* <div className="small text-muted">2020</div> */}
       </Col>
     </Row>
