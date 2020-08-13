@@ -11,6 +11,7 @@ import { addSuccessMessage } from '../../../actions/successMessage/success_messa
 import fetchMyPlan from '../../../actions/subscription/fetch_my_plan';
 import { subscriptionReset } from '../../../actions/subscription/get_subscription';
 import { Config } from '../../../Config';
+import { cancelSubscription, cancelSubReset } from '../../../actions/subscription/cancel_subscription';
 
 const stripePromise = loadStripe(Config.stripe_key);
 
@@ -44,11 +45,27 @@ function UserSubscriptions(props){
 
     useEffect(() => {
       let {success} = props.fetchMyPlan
-      if(success && success.data && success.data.subscription_id){
-        setInitSub(success.data)
-        setSubs(success.data)
+      if(success && success.data){
+          if(success.data.subscription_id){
+            setInitSub(success.data)
+            setSubs(success.data)
+          }else if(success.data.details){
+            setInitSub()
+          }
       }
     }, [props.fetchMyPlan])
+
+    useEffect(() => {
+      let {success} = props.cancelSubscription
+      if(success){
+        Store.dispatch(addSuccessMessage({
+          message: {variant: `success`, message: "Your Subscription has been canceled.", title: ``}
+        }))
+        Store.dispatch(cancelSubReset())
+        Store.dispatch(fetchMyPlan())
+
+      }
+    }, [props.cancelSubscription])
 
     function updatePayment(id){
       let selected = props.fetchPlans.success.data.find(i => i.subscription_id === id)
@@ -70,8 +87,15 @@ function UserSubscriptions(props){
           </div>
         </CardHeader>
         <CardBody className="p-4">
-          {initSub && <div className="offer-box mb-3">
+          {initSub && <div className="offer-box mb-3 py-3">
+            <div>
+            {initSub.amount !== 0 && <button className="float-right btn btn-default btn-secondary sub-cancel"
+              onClick={() => Store.dispatch(cancelSubscription())}>
+              <i className="fa fa-ban mr-1"/>
+                Cancel Subscription
+              </button>}
             You are currently under <b>{initSub.name}</b> subscription plan.
+            </div>
           </div>
             
           }
@@ -132,9 +156,9 @@ function UserSubscriptions(props){
 
 
 function mapStateToProps(state) {
-    let { getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan } = state
+    let { getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan, cancelSubscription } = state
     return {
-      getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan
+      getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan, cancelSubscription
     }
   }
   

@@ -498,8 +498,6 @@ class Dashboard extends Component {
           <Col lg="6" md="6">
             <DayChart option={mainChartOpts} />
           </Col>
-        </Row>
-        <Row>
           <Col lg="6" md="6">
             <MonthChart option={mainChartOpts} />
           </Col>

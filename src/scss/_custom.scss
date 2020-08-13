@@ -533,8 +533,14 @@ input[type=number] {
   border-radius: 5px;
   padding: 1em;
   height: 100%;
-  background: rgba(32,168,216,0.2);
+  background: rgba(255, 103, 55, 0.9);
   cursor: pointer;
+  color: white;
+}
+
+.sub-cancel{
+  margin-top: -7px;
+  margin-bottom: 10px;
 }
 
 .selected-offer{
