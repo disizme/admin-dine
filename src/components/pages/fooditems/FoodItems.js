@@ -484,7 +484,7 @@ function FoodItems(props) {
           onDragOver={(e) => onDragOver(e)}
           onDrop={(e,i) => onDrop(e,i)}
           // deleteTitle="Image"
-          message={`Sorry, There are no records of food items.`}
+          message={`You have no records of food items. Set Up your Menu by clicking "Add New" button above.`}
           onNew={() => {
             props.history.push("/emenu/food-items/new")
           }}

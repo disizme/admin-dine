@@ -13,6 +13,7 @@ const loading = () => <BounceLoader/>;
 
 const Login = React.lazy(() => import('./../../views/Pages/Login/Login'));
 const VerifyAccount = React.lazy(() => import('./../../views/Pages/Login/verify-account'));
+const ForgetPass = React.lazy(() => import('../../views/Pages/Login/forget-pass'));
 const Register = React.lazy(() => import('./../../views/Pages/Register'));
 const Page404 = React.lazy(() => import('./../../views/Pages/Page404'));
 const Page500 = React.lazy(() => import('./../../views/Pages/Page500'));
@@ -75,6 +76,7 @@ class Routes extends Component {
                 <React.Suspense fallback={loading()}>
                   <Switch>
                     <Route exact path="/" render={(props) => <Login {...props}/>}/>
+                    <Route exact path="/forgot-password/:resettoken" name="Password Recovery" render={(props) => <ForgetPass {...props}/>}/>
                     <Route exact path="/user-verify/:veritoken" name="Verification Page" render={(props) => <VerifyAccount {...props}/>}/>
                     <Route exact path="/register" name="Register Page" render={(props) => <Register {...props}/>}/>
                     <Route exact path="/404" name="Page 404" render={(props) => <Page404 {...props}/>}/>

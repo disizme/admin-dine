@@ -140,6 +140,8 @@ class Register extends Component {
                           name="password" id="password"
                           value={this.state.data.password}
                           onChange={e => this.onChange(e)}
+                          pattern="[A-Za-z0-9#$^+=!*()@%&]{8,}"
+                          title="Must contain at least 8 Characters"
                           invalid={this.state.touched.password && (this.state.data.password === '' || this.state.error.password)}
                         />
                         <FormFeedback>Enter Password</FormFeedback>
@@ -150,6 +152,8 @@ class Register extends Component {
                           name="repassword" id="repassword"
                           value={this.state.data.repassword}
                           onChange={e => this.onChange(e)}
+                          pattern="[A-Za-z0-9#$^+=!*()@%&]{8,}"
+                          title="Must contain at least 8 Characters"
                           invalid={this.state.touched.repassword && (this.state.data.repassword === '' || this.state.error.repassword)}
                         />
                         <FormFeedback>Re-enter Password</FormFeedback>

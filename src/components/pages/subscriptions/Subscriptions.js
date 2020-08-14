@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Row, Col, Card, CardBody, CardHeader, Button } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardHeader, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 // import store from "../../../Store"
 import { connect } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
@@ -20,6 +20,7 @@ function UserSubscriptions(props){
     const [initSub, setInitSub] = useState()
     const [subs, setSubs] = useState()
     const [ pay, setPay ] = useState(false)
+    const [ cancelConfirm, setConfirm ] = useState(false)
     const [ high, setHeight ] = useState(0)
 
     useEffect(() => {
@@ -74,7 +75,16 @@ function UserSubscriptions(props){
       setHeight(paymentdetail.current.clientHeight + 10)
     }
 
-    return <Row className="app align-items-center" style={{ minHeight: '0vh'}}>
+    function toggleConfirmation(){
+      setConfirm(!cancelConfirm)
+    }
+
+    function cancelSub(){
+      Store.dispatch(cancelSubscription())
+      setConfirm(false)
+    }
+
+    return <><Row className="app align-items-center" style={{ minHeight: '0vh'}}>
     <Col xs='12'>
       <Card>
       <CardHeader style={{
@@ -90,7 +100,7 @@ function UserSubscriptions(props){
           {initSub && <div className="offer-box mb-3 py-3">
             <div>
             {initSub.amount !== 0 && <button className="float-right btn btn-default btn-secondary sub-cancel"
-              onClick={() => Store.dispatch(cancelSubscription())}>
+              onClick={() => toggleConfirmation()}>
               <i className="fa fa-ban mr-1"/>
                 Cancel Subscription
               </button>}
@@ -152,6 +162,19 @@ function UserSubscriptions(props){
       </Card>
     </Col>
   </Row>
+  {cancelConfirm && <Modal isOpen={cancelConfirm} toggle={() => toggleConfirmation()}>
+        <ModalHeader>Subscription Cancellation</ModalHeader>
+        <ModalBody className="text-center">
+        <div className="text-left mb-2">
+          Are you sure you want to cancel your subscription to plan <b>{initSub.name}</b>?
+          </div>          
+        </ModalBody>
+        <ModalFooter>
+          <Button className="brand-btn" onClick={() => cancelSub()}>Yes</Button>{' '}
+          <Button className="brand-outline-btn" onClick={() => toggleConfirmation()}>No</Button>
+        </ModalFooter>
+      </Modal>}
+  </>
 }
 
 

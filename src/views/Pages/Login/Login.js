@@ -12,7 +12,8 @@ import {
   Input,
   FormGroup,
   Row,
-  Label
+  Label,
+  Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import { getLoginRequest } from "../../../actions/login/login_request";
 import { addSuccessMessage } from "../../../actions/successMessage/success_message";
@@ -21,6 +22,8 @@ import { connect } from "react-redux";
 import BrandLogo from '../../../components/shared/reseller_logo/BrandLogo';
 import { getLoggedInUser } from '../../../actions/login/get_logged_in_user';
 import fetchMyPlan from '../../../actions/subscription/fetch_my_plan';
+import fetchAllUsers from '../../../reducers/superadmin/fetch-users';
+import { sendMail } from '../../../actions/login/login_helper';
 
 let dataFormat= {username: "", password: ""}
 
@@ -28,9 +31,37 @@ class Login extends Component {
   state = {
     data: {...dataFormat},
     error: {...dataFormat},
-    touched: {username: false, password: false}
+    touched: {username: false, password: false},
+    resetPass: false,
+    reset: { email: "", error: false}
   }
 
+  togglePass = () => {
+    this.setState({
+      resetPass: !this.state.resetPass,
+      reset: {...this.state.reset, email: "", error: false }
+    })
+  }
+
+  updateEmail = (e) => {
+    let {value} = e.target
+    let reset = { ...this.state.reset };
+    reset.email = value
+    reset.error = false
+    this.setState({reset})
+  }
+
+  sendResetMail(){
+    let reset = { ...this.state.reset };
+    if(reset.email === ""){
+      reset.error = true
+      this.setState({reset})
+    }else{
+      let d = { email: reset.email}
+      store.dispatch(sendMail(d))
+      this.togglePass()
+    }
+  }
 
   onChange(e) {
     let { name } = e.target;
@@ -119,7 +150,8 @@ class Login extends Component {
                           Login
                           </Button>
                         <br/>
-                        {/* <Button  type='button' color="link" className="px-0" active tabIndex={-1}>Forgot Password?</Button> */}
+                        <Button  type='button' color="link" className="px-0" active tabIndex={-1} onClick={() => this.togglePass() }>
+                          Forgot Password?</Button>
                       </p>
                       <div>
                       </div>
@@ -137,6 +169,23 @@ class Login extends Component {
               </Card>
             </Col>
           </Row>
+          {this.state.resetPass && <Modal isOpen={this.state.resetPass} toggle={() => this.togglePass()}>
+        <ModalHeader>Forgot Your Password?</ModalHeader>
+        <ModalBody>
+          <div className="px-3">
+          <Label for="email">Enter Your Email Address</Label>
+                <Input type="email" placeholder="Email"
+                  name="email" id="email"
+                  value={this.state.reset.email}
+                  invalid={this.state.reset.error}
+                  onChange={e => this.updateEmail(e)} />
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button className="brand-btn" onClick={() => this.sendResetMail()}>Send</Button>{' '}
+          <Button className="brand-outline-btn" onClick={() => this.togglePass()}>Cancel</Button>
+        </ModalFooter>
+      </Modal>}
         </Container>
       </div>
       </div>

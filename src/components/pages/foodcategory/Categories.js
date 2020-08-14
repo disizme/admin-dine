@@ -226,7 +226,7 @@ function Categories(props) {
           onDrop={(e,i) => onDrop(e,i)}
           onEdit={(e) => onEdit(e)}
           onDelete={(e) => onDelete(e)}
-          message={`Sorry, There are no records of food categories.`}
+          message={`You have no records of food categories. Set Up your Menu Categories by clicking "Add New" button above.`}
           onNew={() => {
             props.history.push("/emenu/food-category/new")
           }}
