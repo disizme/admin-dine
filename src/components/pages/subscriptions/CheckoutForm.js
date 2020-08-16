@@ -12,7 +12,8 @@ let couponObj = {
       percent: null,
       amount: null,
       total: null,
-      processing: false
+      processing: false,
+      id: null
 }
 
 class CheckoutForm extends React.Component {
@@ -24,7 +25,8 @@ class CheckoutForm extends React.Component {
       percent: null,
       amount: null,
       total: null,
-      processing: false
+      processing: false,
+      id: null
     },
     data: {
       name: "",
@@ -75,6 +77,9 @@ class CheckoutForm extends React.Component {
     const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: 'card',
       card: card,
+      "billing_details": {
+        name: this.state.data.name
+      }
     });
 
     if (error) {
@@ -83,10 +88,9 @@ class CheckoutForm extends React.Component {
       let data = {
         price_id: this.props.selectedPlan.subscription_id,
         payment_method: paymentMethod.id,
-        name: this.state.data.name
       }
       if(this.state.coupon && this.state.redeemed.valid){
-        data.coupon= this.state.data.coupon
+        data.coupon= this.state.redeemed.id
       }
       if(this.props.initialSub){
         Store.dispatch(getSubscription(data))
@@ -104,6 +108,7 @@ class CheckoutForm extends React.Component {
         redeemed.info = true
         redeemed.valid = fetchCoupon.success.data.valid
         redeemed.amount = fetchCoupon.success.data.amount_off
+        redeemed.id = fetchCoupon.success.data.id
         if(fetchCoupon.success.data.amount_off){
           redeemed.total =  this.props.selectedPlan.amount - fetchCoupon.success.data.amount_off
         }else if(fetchCoupon.success.data.percent_off){
@@ -111,12 +116,10 @@ class CheckoutForm extends React.Component {
         }
         redeemed.percent = fetchCoupon.success.data.percent_off
         redeemed.processing = false
-      this.setState({redeemed})
+        this.setState({redeemed})
       }else if(fetchCoupon.error){
-        redeemed.info = true
-        redeemed.valid = false
-        redeemed.processing = false
-      this.setState({redeemed})
+        redeemed = {...redeemed, ...couponObj}
+        this.setState({redeemed})
       }else if(fetchCoupon.processing){
         redeemed = {...redeemed, ...couponObj}
         this.setState({redeemed})
