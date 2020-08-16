@@ -7,15 +7,15 @@ import {addSuccessMessage} from "../successMessage/success_message";
 import fetchMyPlan from './fetch_my_plan';
 
 function _success(success) {
-  return {type: 'GET_SUBSCRIPTION_SUCCESS', success}
+  return {type: 'UPDATE_CARD_SUCCESS', success}
 }
 
 function _error(error) {
-  return {type: 'GET_SUBSCRIPTION_ERROR', error}
+  return {type: 'UPDATE_CARD_ERROR', error}
 }
 
 function _reset() {
-  return {type: 'SUBSCRIPTION_RESET'}
+  return {type: 'UPDATE_CARD_RESET'}
 }
 
 function _processing(processing) {
@@ -25,12 +25,12 @@ function _processing(processing) {
     return { type: 'DEACTIVATE_LOADING' }
 }
 
-export function getSubscription(data, post) {
+export function updateCard(data) {
   return dispatch => {
     dispatch(_processing(true));
     let config = {
-      url: Config.BaseUrl + `/payment/subscriptions/`,
-      method: post ? "post" : "put",
+      url: Config.BaseUrl + `/payment/updatecard`,
+      method: "put",
       dataType: 'json',
       data: data,
       headers: {
@@ -40,7 +40,6 @@ export function getSubscription(data, post) {
     axios(config).then(res => {
         dispatch(_processing(false));
         dispatch(_success(res));
-        store.dispatch(fetchMyPlan())
       }).catch(error => {
         let response = errorHandler(error)
           store.dispatch(addSuccessMessage({
@@ -52,10 +51,10 @@ export function getSubscription(data, post) {
   }
 }
 
-export function subscriptionReset() {
+export function updateCardReset() {
   return dispatch => {
     dispatch(_reset());
   }
 }
 
-export default getSubscription;
+export default updateCard;

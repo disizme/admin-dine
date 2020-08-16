@@ -12,6 +12,7 @@ import fetchMyPlan from '../../../actions/subscription/fetch_my_plan';
 import { subscriptionReset } from '../../../actions/subscription/get_subscription';
 import { Config } from '../../../Config';
 import { cancelSubscription, cancelSubReset } from '../../../actions/subscription/cancel_subscription';
+import CardDetail from './CardDetail';
 
 const stripePromise = loadStripe(Config.stripe_key);
 
@@ -72,7 +73,7 @@ function UserSubscriptions(props){
       let selected = props.fetchPlans.success.data.find(i => i.subscription_id === id)
       setSubs(selected)
       setPay(true)
-      setHeight(paymentdetail.current.clientHeight + 10)
+      setHeight(paymentdetail.current.clientHeight + 80)
     }
 
     function toggleConfirmation(){
@@ -145,7 +146,9 @@ function UserSubscriptions(props){
                     { <Elements stripe={stripePromise}>
                       <InjectedCheckoutForm 
                         selectedPlan={subs}
-                        initialSub={initSub} />
+                        initialSub={initSub} 
+                        fetchCoupon={props.fetchCoupon}
+                        />
                     </Elements>}
                   </div>
                 </div>
@@ -162,6 +165,7 @@ function UserSubscriptions(props){
       </Card>
     </Col>
   </Row>
+  <CardDetail />
   {cancelConfirm && <Modal isOpen={cancelConfirm} toggle={() => toggleConfirmation()}>
         <ModalHeader>Subscription Cancellation</ModalHeader>
         <ModalBody className="text-center">
@@ -179,9 +183,9 @@ function UserSubscriptions(props){
 
 
 function mapStateToProps(state) {
-    let { getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan, cancelSubscription } = state
+    let { getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan, cancelSubscription, fetchCoupon } = state
     return {
-      getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan, cancelSubscription
+      getLoggedInUser, fetchPlans, getSubscription, fetchMyPlan, cancelSubscription, fetchCoupon
     }
   }
   

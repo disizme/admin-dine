@@ -141,10 +141,10 @@ a, .brand-color{
     margin-bottom: 1rem;
 }
 
-// .btn:focus, .btn.focus {
-//     outline: 0;
-//     box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25);
-// }
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: none !important;
+}
 
 .form-control:focus{
     border-color: #FF6737;
@@ -396,6 +396,14 @@ html{
   color: var(--text-color);
 }
 
+.color-success{
+  color: rgb(113, 224, 85);
+}
+
+.color-error{
+  color: rgba(235, 46, 46, 0.933)
+}
+
 .brand-component{
   background-color: var(--brand-color) !important;
   color: #f7f7f7;
@@ -563,14 +571,23 @@ input[type=number] {
   box-shadow: 0 3px 10px 0 #33333355;
 }
 
+.show-pointer{
+  cursor: pointer;
+}
 
 .StripeElement {
-  margin: 15px auto;
+  margin: 15px 0 auto;
   padding: 10px 12px;
   color: #32325d;
   background-color: #f2f2f2;
   border: 1px solid #e7eaec;
   border-radius: 4px;
+}
+
+.StripeElement:focus{
+    border: 1px solid #e7eaec;
+    border-width: 1px;
+    background: #f2f2f2;
 }
 
 .StripeElement--webkit-autofill {

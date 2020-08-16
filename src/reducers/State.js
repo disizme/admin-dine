@@ -48,6 +48,8 @@ import fetchPlans from './subscription/fetch-plans';
 import getSubscription from './subscription/get-subscription';
 import fetchMyPlan from './subscription/fetch-my-plan';
 import cancelSubscription from './subscription/cancel-subscription';
+import fetchCoupon from './subscription/fetch-coupon';
+import updateCard from './subscription/update-card';
 
 const allReducers = combineReducers({
   loading, successMessage, fetchAllUsers,
@@ -59,7 +61,7 @@ const allReducers = combineReducers({
   reorderFoodCategory, reorderFoodItems,
   fetchCustomers, editCustomers, postCustomers, deleteCustomers,
   getLoginRequest, getLoggedInUser, getSignupRequest,
-  fetchPlans, getSubscription, fetchMyPlan, cancelSubscription
+  fetchPlans, getSubscription, fetchMyPlan, cancelSubscription, fetchCoupon, updateCard
 });
 
 export default allReducers;
