@@ -9,6 +9,7 @@ import Store from '../../../Store';
 import { addSuccessMessage } from '../../../actions/successMessage/success_message';
 import { Config } from '../../../Config';
 import UpdateCheckoutForm from './UpdateCardForm';
+import { updateCardReset } from '../../../actions/subscription/update_card';
 
 const stripePromise = loadStripe(Config.stripe_key);
 
@@ -21,6 +22,7 @@ function CardDetail(props) {
             Store.dispatch(addSuccessMessage({
                 message: { variant: `success`, message: "Your Card has been updated.", title: `` }
             }))
+            Store.dispatch(updateCardReset())
             setupdCard(false)
         }
     }, [props.updateCard])

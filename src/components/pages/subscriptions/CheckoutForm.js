@@ -61,42 +61,48 @@ class CheckoutForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    const { stripe, elements } = this.props;
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const card = elements.getElement(CardElement);
-    // const result = await stripe.createToken(card);
-    // if (result.error) {
-    //   console.log(result.error.message);
-    // } else {
-    //   console.log(result.token);
-    // }
-
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
-      card: card,
-      "billing_details": {
-        name: this.state.data.name
+    if (this.props.initialSub && this.props.initialSub.mode) {
+      const { stripe, elements } = this.props;
+      if (!stripe || !elements) {
+        return;
       }
-    });
 
-    if (error) {
-      console.log('[error]', error);
-    } else {
+      const card = elements.getElement(CardElement);
+      // const result = await stripe.createToken(card);
+      // if (result.error) {
+      //   console.log(result.error.message);
+      // } else {
+      //   console.log(result.token);
+      // }
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: card,
+        "billing_details": {
+          name: this.state.data.name
+        }
+      });
+
+      if (error) {
+        console.log('[error]', error);
+      } else {
+        let data = {
+          price_id: this.props.selectedPlan.subscription_id,
+          payment_method: paymentMethod.id,
+        }
+        if (this.state.coupon && this.state.redeemed.valid) {
+          data.coupon = this.state.redeemed.id
+        }
+        Store.dispatch(getSubscription(data))
+      }
+    }else {
       let data = {
         price_id: this.props.selectedPlan.subscription_id,
-        payment_method: paymentMethod.id,
       }
-      if(this.state.coupon && this.state.redeemed.valid){
-        data.coupon= this.state.redeemed.id
+      if (this.state.coupon && this.state.redeemed.valid) {
+        data.coupon = this.state.redeemed.id
       }
-      if(this.props.initialSub){
-        Store.dispatch(getSubscription(data))
-      }else{
-        Store.dispatch(getSubscription(data, true))
-      }
+      Store.dispatch(getSubscription(data))
     }
   };
 
@@ -143,7 +149,7 @@ class CheckoutForm extends React.Component {
         </div>}
         </div>
         <form onSubmit={this.handleSubmit}>
-          <label className="w-100">
+          {this.props.initialSub && this.props.initialSub.mode && <><label className="w-100">
             <span className="ml-2">
               Name
             </span>
@@ -157,7 +163,7 @@ class CheckoutForm extends React.Component {
               />
             </div>
           </label>
-          <CardSection />
+          <CardSection /></>}
          {this.state.coupon ? <label className="w-100 mb-3">
             <span className="ml-2">
               Coupon
@@ -194,7 +200,7 @@ class CheckoutForm extends React.Component {
           }
           <div className="text-right mx-2 mb-3">
           <button disabled={!this.props.stripe} className="btn btn-secondary brand-btn" type="submit">
-            Pay
+            {this.props.initialSub && this.props.initialSub.mode ? "Pay" : "Change Plan"}
           </button>
           </div>
         </form> 

@@ -37,7 +37,7 @@ function UserSubscriptions(props){
       let {success} = props.getSubscription
       if(success){
         Store.dispatch(addSuccessMessage({
-          message: {variant: `success`, message: "Your Payment has been accepted.", title: ``}
+          message: {variant: `success`, message: "Your Subscription has been updated.", title: ``}
         }))
         Store.dispatch(subscriptionReset())
         setPay(false)
@@ -165,7 +165,7 @@ function UserSubscriptions(props){
       </Card>
     </Col>
   </Row>
-  <CardDetail />
+  {props.fetchMyPlan.success && !props.fetchMyPlan.success.data.mode && <CardDetail />}
   {cancelConfirm && <Modal isOpen={cancelConfirm} toggle={() => toggleConfirmation()}>
         <ModalHeader>Subscription Cancellation</ModalHeader>
         <ModalBody className="text-center">
