@@ -152,12 +152,6 @@ function UserSubscriptions(props){
                     </Elements>}
                   </div>
                 </div>
-                {/* {!expand && <div className="text-right mx-2 mb-3">
-                  <Button className="brand-btn btn-sm"
-                    disabled={props.total === 0}
-                    onClick={() => startPayment()}>Make Payment
-                </Button>
-                </div>} */}
               </div>
               </Col>
             </Row>
